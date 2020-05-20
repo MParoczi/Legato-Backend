@@ -8,6 +8,7 @@ using Microsoft.OpenApi.Models;
 
 namespace Legato
 {
+#pragma warning disable CS1591
     /// <summary>
     ///     ASP.NET Core apps use a Startup class, which is named Startup by convention. The Startup class:
     ///     <list type="bullet">
@@ -97,4 +98,5 @@ namespace Legato
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
+#pragma warning restore CS1591
 }
