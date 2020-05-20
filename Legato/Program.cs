@@ -18,6 +18,13 @@ namespace Legato
             CreateHostBuilder(args).Build().Run();
         }
 
+        /// <summary>
+        ///     The default implementation of this method looks for a public static IHostBuilder CreateHostBuilder(string[] args)
+        ///     method defined on the entry point of the assembly of TEntryPoint and invokes it passing an empty string array as
+        ///     arguments.
+        /// </summary>
+        /// <param name="args">Empty string array as arguments</param>
+        /// <returns>Returns a IHostBuilder</returns>
         public static IHostBuilder CreateHostBuilder(string[] args)
         {
             return Host.CreateDefaultBuilder(args)
