@@ -9,6 +9,10 @@ namespace Legato
     /// </summary>
     public class Program
     {
+        /// <summary>
+        /// The Main method is the entry point of the Legato Web API.
+        /// </summary>
+        /// <param name="args">The parameter of the Main method is a String array that represents the command-line arguments.</param>
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
