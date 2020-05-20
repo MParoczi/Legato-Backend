@@ -30,6 +30,14 @@ namespace Legato
         {
             if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Legato");
+                c.RoutePrefix = string.Empty;
+            });
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
