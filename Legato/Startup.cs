@@ -8,6 +8,23 @@ using Microsoft.OpenApi.Models;
 
 namespace Legato
 {
+    /// <summary>
+    ///     ASP.NET Core apps use a Startup class, which is named Startup by convention. The Startup class:
+    ///     <list type="bullet">
+    ///         <item>
+    ///             <description>
+    ///                 Optionally includes a ConfigureServices method to configure the app's services.A service is a
+    ///                 reusable component that provides app functionality.Services are registered in ConfigureServices
+    ///                 and consumed across the app via dependency injection (DI) or ApplicationServices.
+    ///             </description>
+    ///         </item>
+    ///         <item>
+    ///             <description>
+    ///                 Includes a Configure method to create the app's request processing pipeline.
+    ///             </description>
+    ///         </item>
+    ///     </list>
+    /// </summary>
     public class Startup
     {
         public Startup(IConfiguration configuration)
