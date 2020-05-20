@@ -27,13 +27,17 @@ namespace Legato
     /// </summary>
     public class Startup
     {
+        /// <summary>
+        ///     Constructor for the Startup class that is called in the CreateHostBuilder method in the Program class.
+        /// </summary>
+        /// <param name="configuration">Represents a set of key/value application configuration properties.</param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
         /// <summary>
-        /// Represents a set of key/value application configuration properties.
+        ///     Represents a set of key/value application configuration properties.
         /// </summary>
         public IConfiguration Configuration { get; }
 
