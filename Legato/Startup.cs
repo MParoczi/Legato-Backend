@@ -63,6 +63,12 @@ namespace Legato
             });
         }
 
+        /// <summary>
+        ///     The Configure method is a place where you can configure application request pipeline for your application using
+        ///     IApplicationBuilder instance that is provided by the built-in IoC container.
+        /// </summary>
+        /// <param name="app">IApplicationBuilder instance that is provided by the built-in IoC container</param>
+        /// <param name="env">Provides information about the web hosting environment an application is running in.</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
