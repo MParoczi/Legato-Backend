@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -22,7 +23,19 @@ namespace Legato
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "Legato Web API", Version = "v1"});
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Legato Web API",
+                    Description =
+                        "This is Legato's main web API which contains the logic and data tier and is responsible for the HTTP request-response handling.",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Márk Paróczi",
+                        Email = "mark.paroczi@gmail.com",
+                        Url = new Uri("https://github.com/MParoczi")
+                    }
+                });
             });
         }
 
