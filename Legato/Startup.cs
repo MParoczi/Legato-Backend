@@ -32,6 +32,9 @@ namespace Legato
             Configuration = configuration;
         }
 
+        /// <summary>
+        /// Represents a set of key/value application configuration properties.
+        /// </summary>
         public IConfiguration Configuration { get; }
 
         /// <summary>
