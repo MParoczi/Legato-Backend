@@ -34,6 +34,13 @@ namespace Legato
 
         public IConfiguration Configuration { get; }
 
+        /// <summary>
+        ///     The ConfigureServices method is a place where you can register your dependent classes with the built-in IoC
+        ///     container. After registering dependent class, it can be used anywhere in the application. You just need to include
+        ///     it in the parameter of the constructor of a class where you want to use it. The IoC container will inject it
+        ///     automatically.
+        /// </summary>
+        /// <param name="services">Container for the dependencies</param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
