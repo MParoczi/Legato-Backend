@@ -3,6 +3,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Legato
 {
+#pragma warning disable CS1591
     /// <summary>
     ///     ASP.NET Core web application is actually a console project which starts executing from the entry point public
     ///     static void Main() in Program class where we can create a host for the web application.
@@ -31,4 +32,5 @@ namespace Legato
                 .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
         }
     }
+#pragma warning restore CS1591
 }
