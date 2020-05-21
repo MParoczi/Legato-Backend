@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Legato.Models
 {
+    /// <summary>
+    ///     The main user model that is provided for the identity
+    /// </summary>
     public class AppUser : RegisterUser
     {
         /// <summary>
