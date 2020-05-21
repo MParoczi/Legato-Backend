@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Legato.Models
 {
-    public class AppUser<TKey> : RegisterUser where TKey : IEquatable<TKey>
+    public class AppUser : RegisterUser
     {
         /// <summary>
         ///     Initializes a new instance of <see cref="IdentityUser{TKey}" />.
@@ -25,7 +25,7 @@ namespace Legato.Models
         ///     Gets or sets the primary key for this user.
         /// </summary>
         [PersonalData]
-        public virtual TKey Id { get; set; }
+        public virtual int Id { get; set; }
 
         /// <summary>
         ///     Gets or sets the user name for this user.
