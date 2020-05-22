@@ -9,7 +9,7 @@ namespace Legato.Models
     public class UserRegistration
     {
         /// <summary>
-        ///     Fist name of the user to register
+        ///     First name of the user to register
         /// </summary>
         public string FirstName { get; set; }
 
