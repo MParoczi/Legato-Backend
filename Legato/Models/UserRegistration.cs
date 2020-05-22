@@ -6,7 +6,7 @@ namespace Legato.Models
     /// <summary>
     ///     UserRegistration model which contains the necessary properties to register a user
     /// </summary>
-    public class UserRegistration
+    public class UserRegistration : UserLogin
     {
         /// <summary>
         ///     First name of the user to register
