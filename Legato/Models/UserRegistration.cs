@@ -4,9 +4,9 @@ using System.Collections.Generic;
 namespace Legato.Models
 {
     /// <summary>
-    ///     RegisterUser model which contains the necessary properties to register a user
+    ///     UserRegistration model which contains the necessary properties to register a user
     /// </summary>
-    public class RegisterUser
+    public class UserRegistration
     {
         /// <summary>
         ///     Fist name of the user to register
