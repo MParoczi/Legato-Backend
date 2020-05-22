@@ -1,9 +1,9 @@
 ﻿namespace Legato.Models
 {
     /// <summary>
-    ///     LoginUser model which contains the necessary properties to login a user
+    ///     UserLogin model which contains the necessary properties to login a user
     /// </summary>
-    public class LoginUser
+    public class UserLogin
     {
         /// <summary>
         ///     Email address of the user to login
