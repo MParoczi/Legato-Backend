@@ -70,7 +70,7 @@ namespace Legato.Extensions
                 options.Password.RequireUppercase = true;
                 options.Password.RequiredUniqueChars = 1;
                 options.Password.RequireNonAlphanumeric = true;
-            });
+            }).AddEntityFrameworkStores<IdentityAppContext>();
         }
     }
 }
