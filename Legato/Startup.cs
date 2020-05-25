@@ -1,13 +1,9 @@
-using System;
-using System.IO;
-using System.Reflection;
 using Legato.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 
 namespace Legato
 {
@@ -56,27 +52,8 @@ namespace Legato
         {
             services.AddControllers();
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Version = "v1",
-                    Title = "Legato Web API",
-                    Description =
-                        "This is Legato's main web API which contains the logic and data tier and is responsible for the HTTP request-response handling.",
-                    Contact = new OpenApiContact
-                    {
-                        Name = "Márk Paróczi",
-                        Email = "mark.paroczi@gmail.com",
-                        Url = new Uri("https://github.com/MParoczi")
-                    }
-                });
+            services.ConfigureSwagger();
 
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                c.IncludeXmlComments(xmlPath);
-            });
-            
             services.ConfigureSqlConnection();
         }
 
