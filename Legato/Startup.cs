@@ -55,6 +55,8 @@ namespace Legato
             services.ConfigureSwagger();
 
             services.ConfigureSqlConnection();
+            
+            services.ConfigureIdentity();
         }
 
         /// <summary>
