@@ -55,10 +55,12 @@ namespace Legato
             services.ConfigureSwagger();
 
             services.ConfigureSqlConnection();
-            
+
             services.ConfigureIdentity();
-            
+
             services.ConfigureRepository();
+
+            services.ConfigureCors();
         }
 
         /// <summary>

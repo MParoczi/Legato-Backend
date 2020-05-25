@@ -83,5 +83,24 @@ namespace Legato.Extensions
         {
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
         }
+
+        /// <summary>
+        ///     Configures CORS policy
+        /// </summary>
+        /// <param name="services">Specifies the contract for a collection of service descriptors.</param>
+        public static void ConfigureCors(this IServiceCollection services)
+        {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("_myAllowSpecificOrigins",
+                    builder =>
+                    {
+                        builder.WithOrigins(Environment.GetEnvironmentVariable("LEGATO_FRONTEND"))
+                            .AllowAnyHeader()
+                            .AllowAnyMethod()
+                            .AllowCredentials();
+                    });
+            });
+        }
     }
 }
