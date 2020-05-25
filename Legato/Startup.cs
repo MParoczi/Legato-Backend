@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Reflection;
+using Legato.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -75,6 +76,8 @@ namespace Legato
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
+            
+            services.ConfigureSqlConnection();
         }
 
         /// <summary>
