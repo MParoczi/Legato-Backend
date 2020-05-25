@@ -4,6 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Legato.Migrations
 {
+#pragma warning disable CS1591
     public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -222,4 +223,5 @@ namespace Legato.Migrations
                 name: "AspNetUsers");
         }
     }
+#pragma warning restore CS1591
 }
