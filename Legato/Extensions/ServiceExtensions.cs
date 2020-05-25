@@ -18,7 +18,7 @@ namespace Legato.Extensions
         /// <summary>
         ///     The ConfigureSqlConnection method creates a connection between the application and the PostgreSQL server
         /// </summary>
-        /// <param name="services"></param>
+        /// <param name="services">Specifies the contract for a collection of service descriptors.</param>
         public static void ConfigureSqlConnection(this IServiceCollection services)
         {
             var connectionString = Environment.GetEnvironmentVariable("LEGATO_CONNECTION_STRING");
@@ -30,7 +30,7 @@ namespace Legato.Extensions
         /// <summary>
         ///     The ConfigureSwagger method configure the Swagger which provides the API's documentation
         /// </summary>
-        /// <param name="services"></param>
+        /// <param name="services">Specifies the contract for a collection of service descriptors.</param>
         public static void ConfigureSwagger(this IServiceCollection services)
         {
             services.AddSwaggerGen(c =>
@@ -58,7 +58,7 @@ namespace Legato.Extensions
         /// <summary>
         ///     The ConfigureIdentity method configures the Identity for the API so the user's details are managed
         /// </summary>
-        /// <param name="services"></param>
+        /// <param name="services">Specifies the contract for a collection of service descriptors.</param>
         public static void ConfigureIdentity(this IServiceCollection services)
         {
             services.AddIdentity<AppUser, AppRole>(options =>
