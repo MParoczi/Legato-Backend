@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using Legato.Contexts.Contracts;
+using Legato.Contexts.Repositories;
 using Legato.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -71,6 +73,15 @@ namespace Legato.Extensions
                 options.Password.RequiredUniqueChars = 1;
                 options.Password.RequireNonAlphanumeric = true;
             }).AddEntityFrameworkStores<AppContext>();
+        }
+
+        /// <summary>
+        ///     Configures the repository wrapper class and adds it to the services
+        /// </summary>
+        /// <param name="services">Specifies the contract for a collection of service descriptors.</param>
+        public static void ConfigureRepository(this IServiceCollection services)
+        {
+            services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
         }
     }
 }
