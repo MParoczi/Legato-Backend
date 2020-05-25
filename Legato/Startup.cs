@@ -57,6 +57,8 @@ namespace Legato
             services.ConfigureSqlConnection();
             
             services.ConfigureIdentity();
+            
+            services.ConfigureRepository();
         }
 
         /// <summary>
