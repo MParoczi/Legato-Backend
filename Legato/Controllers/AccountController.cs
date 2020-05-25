@@ -1,4 +1,6 @@
-﻿using Legato.Models;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Legato.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,5 +33,34 @@ namespace Legato.Controllers
         ///     Provides the APIs for user sign in.
         /// </summary>
         private SignInManager<AppUser> SignInManager { get; }
+
+        /// <summary>
+        ///     Register the user with the information sent in the HTTP post request
+        /// </summary>
+        /// <param name="model">Simple POCO object that contains the necessary properties to register the user</param>
+        /// <returns>Defines a contract that represents the result of an action method.</returns>
+        [HttpPost]
+        public async Task<ActionResult> Register([FromBody] UserRegistration model)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+
+            var user = await UserManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                user = new AppUser
+                {
+                    UserName = model.Email, Birthdate = model.Birthdate, Country = model.Country,
+                    Email = model.Email, Genres = new List<string>(model.Genres), FirstName = model.FirstName,
+                    LastName = model.LastName
+                };
+                var result = await UserManager.CreateAsync(user, model.Password);
+            }
+            else
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+        }
     }
 }
