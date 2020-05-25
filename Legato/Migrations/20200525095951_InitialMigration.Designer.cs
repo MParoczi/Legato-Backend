@@ -9,6 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Legato.Migrations
 {
+#pragma warning disable CS1591
     [DbContext(typeof(IdentityAppContext))]
     [Migration("20200525095951_InitialMigration")]
     partial class InitialMigration
@@ -288,4 +289,5 @@ namespace Legato.Migrations
 #pragma warning restore 612, 618
         }
     }
+#pragma warning restore CS1591
 }
