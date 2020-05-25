@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using Legato.Contexts;
+using Legato.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
@@ -51,6 +52,24 @@ namespace Legato.Extensions
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
+            });
+        }
+
+        /// <summary>
+        ///     The ConfigureIdentity method configures the Identity for the API so the user's details are managed
+        /// </summary>
+        /// <param name="services"></param>
+        public static void ConfigureIdentity(this IServiceCollection services)
+        {
+            services.AddIdentity<AppUser, AppRole>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 8;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredUniqueChars = 1;
+                options.Password.RequireNonAlphanumeric = true;
             });
         }
     }
