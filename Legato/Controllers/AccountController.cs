@@ -14,5 +14,25 @@ namespace Legato.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
+        /// <summary>
+        ///     Constructor for the AccountController class
+        /// </summary>
+        /// <param name="userManager">Provides the APIs for managing user in a persistence store.</param>
+        /// <param name="signInManager">Provides the APIs for user sign in.</param>
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        {
+            UserManager = userManager;
+            SignInManager = signInManager;
+        }
+
+        /// <summary>
+        ///     Provides the APIs for managing user in a persistence store.
+        /// </summary>
+        private UserManager<AppUser> UserManager { get; }
+
+        /// <summary>
+        ///     Provides the APIs for user sign in.
+        /// </summary>
+        private SignInManager<AppUser> SignInManager { get; }
     }
 }
