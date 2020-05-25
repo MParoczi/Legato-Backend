@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Npgsql;
+using AppContext = Legato.Contexts.AppContext;
 
 namespace Legato.Extensions
 {
@@ -23,7 +24,7 @@ namespace Legato.Extensions
         {
             var connectionString = Environment.GetEnvironmentVariable("LEGATO_CONNECTION_STRING");
 
-            services.AddDbContext<IdentityAppContext>(cfg =>
+            services.AddDbContext<AppContext>(cfg =>
                 cfg.UseNpgsql(connectionString ?? throw new NpgsqlException()));
         }
 
@@ -50,7 +51,7 @@ namespace Legato.Extensions
                 });
 
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                var xmlPath = Path.Combine(System.AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
         }
@@ -70,7 +71,7 @@ namespace Legato.Extensions
                 options.Password.RequireUppercase = true;
                 options.Password.RequiredUniqueChars = 1;
                 options.Password.RequireNonAlphanumeric = true;
-            }).AddEntityFrameworkStores<IdentityAppContext>();
+            }).AddEntityFrameworkStores<AppContext>();
         }
     }
 }

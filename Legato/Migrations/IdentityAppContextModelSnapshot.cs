@@ -5,10 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+using AppContext = Legato.Contexts.AppContext;
 
 namespace Legato.Migrations
 {
-    [DbContext(typeof(IdentityAppContext))]
+    [DbContext(typeof(AppContext))]
     partial class IdentityAppContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

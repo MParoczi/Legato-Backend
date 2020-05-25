@@ -6,11 +6,12 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+using AppContext = Legato.Contexts.AppContext;
 
 namespace Legato.Migrations
 {
 #pragma warning disable CS1591
-    [DbContext(typeof(IdentityAppContext))]
+    [DbContext(typeof(AppContext))]
     [Migration("20200525095951_InitialMigration")]
     partial class InitialMigration
     {
