@@ -1,3 +1,7 @@
+﻿using Legato.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+
 namespace Legato.Contexts
 {
     /// <summary>
@@ -6,6 +10,12 @@ namespace Legato.Contexts
     /// </summary>
     public class IdentityAppContext : IdentityDbContext<AppUser, AppRole, int>
     {
-        
+        /// <summary>
+        ///     Constructor for IdentityAppContext
+        /// </summary>
+        /// <param name="options">The options to be used by a DbContext.</param>
+        public IdentityAppContext(DbContextOptions<IdentityAppContext> options) : base(options)
+        {
+        }
     }
 }
