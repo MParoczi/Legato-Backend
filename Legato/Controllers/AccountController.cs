@@ -65,7 +65,7 @@ namespace Legato.Controllers
                 return BadRequest();
             }
 
-            return Ok();
+            return Ok(user);
         }
     }
 }
