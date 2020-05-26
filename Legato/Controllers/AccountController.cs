@@ -9,7 +9,7 @@ namespace Legato.Controllers
     /// <summary>
     ///     Controller class that handles HTTP Requests for the registration, login and logout of the users
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class AccountController : ControllerBase
     {
