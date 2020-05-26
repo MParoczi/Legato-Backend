@@ -45,6 +45,7 @@ namespace Legato.Controllers
         {
             if (!ModelState.IsValid) return BadRequest();
 
+            var response = new Response();
             var user = await UserManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
@@ -62,10 +63,12 @@ namespace Legato.Controllers
             }
             else
             {
-                return BadRequest();
+                response.Message = "There is a registration under this email account";
+                return BadRequest(response);
             }
 
-            return Ok(user);
+            response.Message = "Registration was successful";
+            return Ok(response);
         }
     }
 }
