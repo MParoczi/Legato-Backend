@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Legato.Extensions;
 using Legato.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -49,8 +50,12 @@ namespace Legato.Controllers
             {
                 user = new AppUser
                 {
-                    UserName = model.Email, Birthdate = model.Birthdate, Country = model.Country,
-                    Email = model.Email, Genres = new List<string>(model.Genres), FirstName = model.FirstName,
+                    UserName = model.Email,
+                    Birthdate = Converters.DateTimeConverter(model.Birthdate),
+                    Country = model.Country,
+                    Email = model.Email,
+                    Genres = new List<string>(model.Genres),
+                    FirstName = model.FirstName,
                     LastName = model.LastName
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
