@@ -1,4 +1,4 @@
-namespace Legato.Models
+﻿namespace Legato.Models
 {
     /// <summary>
     ///     Contains properties for the HTTP responses
@@ -26,11 +26,11 @@ namespace Legato.Models
         /// <summary>
         ///     Payload of the response object
         /// </summary>
-        public object Payload { get; }
+        public object Payload { get; set; }
 
         /// <summary>
         ///     API response message to display notifications from the API
         /// </summary>
-        public string Message { get; }
+        public string Message { get; set; }
     }
 }
