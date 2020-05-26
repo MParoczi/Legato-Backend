@@ -1,10 +1,17 @@
-﻿namespace Legato.Models
+namespace Legato.Models
 {
     /// <summary>
     ///     Contains properties for the HTTP responses
     /// </summary>
     public class Response
     {
+        /// <summary>
+        ///     Default constructor for the Response class
+        /// </summary>
+        public Response()
+        {
+        }
+
         /// <summary>
         ///     Constructor for the Response class
         /// </summary>
