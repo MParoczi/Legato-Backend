@@ -83,6 +83,8 @@ namespace Legato
 
             app.UseHttpsRedirection();
 
+            app.UseCors("_myAllowSpecificOrigins");
+
             app.UseRouting();
 
             app.UseAuthentication();
