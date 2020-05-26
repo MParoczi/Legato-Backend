@@ -21,7 +21,7 @@ namespace Legato.Models
         /// <summary>
         ///     Birthdate of the user to register
         /// </summary>
-        public DateTime Birthdate { get; set; }
+        public string Birthdate { get; set; }
 
         /// <summary>
         ///     Home country of the user to register
