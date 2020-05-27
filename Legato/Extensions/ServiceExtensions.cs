@@ -1,10 +1,12 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using EmailService;
 using Legato.Contexts.Contracts;
 using Legato.Contexts.Repositories;
 using Legato.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Npgsql;
@@ -101,6 +103,19 @@ namespace Legato.Extensions
                             .AllowCredentials();
                     });
             });
+        }
+
+        /// <summary>
+        /// Configures the EmailServices that handles the confirmation letter sending
+        /// </summary>
+        /// <param name="services">Specifies the contract for a collection of service descriptors.</param>
+        /// <param name="configuration">Represents a set of key/value application configuration properties.</param>
+        public static void ConfigureEmailService(this IServiceCollection services, IConfiguration configuration)
+        {
+            var emailConfig = configuration
+                .GetSection("EmailConfiguration")
+                .Get<EmailConfiguration>();
+            services.AddSingleton(emailConfig);
         }
     }
 }
