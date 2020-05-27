@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Legato", "Legato\Legato.csproj", "{94CA3423-36F6-4E35-B64F-3E00670DB7C4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailService", "EmailService\EmailService.csproj", "{4AC245C2-3228-47EC-A05C-425CADA94180}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{94CA3423-36F6-4E35-B64F-3E00670DB7C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94CA3423-36F6-4E35-B64F-3E00670DB7C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94CA3423-36F6-4E35-B64F-3E00670DB7C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AC245C2-3228-47EC-A05C-425CADA94180}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AC245C2-3228-47EC-A05C-425CADA94180}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AC245C2-3228-47EC-A05C-425CADA94180}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AC245C2-3228-47EC-A05C-425CADA94180}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
