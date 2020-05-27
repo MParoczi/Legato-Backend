@@ -44,9 +44,16 @@ namespace Legato.Controllers
         [HttpPost]
         public async Task<ActionResult> Register([FromBody] UserRegistration model)
         {
-            if (!ModelState.IsValid) return BadRequest();
-
             var response = new Response();
+            var validator = new UserInputValidation(model);
+
+            if (!ModelState.IsValid || !validator.RegistrationIsValid())
+            {
+                response.Message = "Registration data is in invalid form";
+                return BadRequest(response);
+            }
+
+
             var user = await UserManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
