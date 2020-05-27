@@ -115,6 +115,7 @@ namespace Legato.Extensions
             var emailConfig = configuration
                 .GetSection("EmailConfiguration")
                 .Get<EmailConfiguration>();
+            emailConfig.Password = Environment.GetEnvironmentVariable("LEGATO_EMAIL_PASSWORD");
             services.AddSingleton(emailConfig);
         }
     }
