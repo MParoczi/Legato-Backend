@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Legato.Extensions;
 using Legato.Models;
+using Legato.Utilities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 

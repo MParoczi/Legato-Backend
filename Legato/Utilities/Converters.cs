@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Legato.Extensions
+namespace Legato.Utilities
 {
     /// <summary>
     ///     Contains methods to convert one type to another
