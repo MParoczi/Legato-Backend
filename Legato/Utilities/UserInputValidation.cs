@@ -12,9 +12,7 @@ namespace Legato.Utilities
     /// </summary>
     public class UserInputValidation
     {
-        private readonly UserRegistration _userRegistration;
-
-        private readonly List<string> musicGenres = new List<string>
+        private readonly List<string> _musicGenres = new List<string>
         {
             "Pop",
             "Electronic/Dance",
@@ -38,6 +36,8 @@ namespace Legato.Utilities
             "Afro",
             "K-Pop"
         };
+
+        private readonly UserRegistration _userRegistration;
 
         /// <summary>
         ///     Constructor for UserInputValidation class
@@ -123,7 +123,7 @@ namespace Legato.Utilities
         {
             if (genres == null) throw new ValidationException();
 
-            if (!genres.All(genre => musicGenres.Contains(genre))) throw new ValidationException();
+            if (!genres.All(genre => _musicGenres.Contains(genre))) throw new ValidationException();
 
             return true;
         }
