@@ -106,7 +106,7 @@ namespace Legato.Extensions
         }
 
         /// <summary>
-        /// Configures the EmailServices that handles the confirmation letter sending
+        ///     Configures the EmailServices that handles the confirmation letter sending
         /// </summary>
         /// <param name="services">Specifies the contract for a collection of service descriptors.</param>
         /// <param name="configuration">Represents a set of key/value application configuration properties.</param>
@@ -117,6 +117,7 @@ namespace Legato.Extensions
                 .Get<EmailConfiguration>();
             emailConfig.Password = Environment.GetEnvironmentVariable("LEGATO_EMAIL_PASSWORD");
             services.AddSingleton(emailConfig);
+            services.AddScoped<IEmailSender, EmailSender>();
         }
     }
 }
