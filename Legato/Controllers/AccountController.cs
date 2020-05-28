@@ -76,6 +76,20 @@ namespace Legato.Controllers
                     LastName = model.LastName
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    var token = await UserManager.GenerateEmailConfirmationTokenAsync(user);
+                    var confirmationLink =
+                        Url.Action("ConfirmEmail", "Account", new {userEmail = user.Email, token},
+                            Request.Scheme);
+
+                    var emailContent = EmailSender.CreateEmailContent(user.FirstName, confirmationLink);
+                    var message = new Message(new[] {user.Email}, "Confirmation letter - Legato",
+                        emailContent);
+
+                    await EmailSender.SendEmailAsync(message);
+                }
             }
             else
             {
