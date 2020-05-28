@@ -1,4 +1,4 @@
-﻿using MailKit.Net.Smtp;
+using MailKit.Net.Smtp;
 using MimeKit;
 using MimeKit.Text;
 
@@ -33,21 +33,19 @@ namespace EmailService
 
         private void Send(MimeMessage mailMessage)
         {
-            using (var client = new SmtpClient())
+            using var client = new SmtpClient();
+            try
             {
-                try
-                {
-                    client.Connect(_emailConfig.SmtpServer, _emailConfig.Port, true);
-                    client.AuthenticationMechanisms.Remove("XOAUTH2");
-                    client.Authenticate(_emailConfig.UserName, _emailConfig.Password);
+                client.Connect(_emailConfig.SmtpServer, _emailConfig.Port, true);
+                client.AuthenticationMechanisms.Remove("XOAUTH2");
+                client.Authenticate(_emailConfig.UserName, _emailConfig.Password);
 
-                    client.Send(mailMessage);
-                }
-                finally
-                {
-                    client.Disconnect(true);
-                    client.Dispose();
-                }
+                client.Send(mailMessage);
+            }
+            finally
+            {
+                client.Disconnect(true);
+                client.Dispose();
             }
         }
     }
