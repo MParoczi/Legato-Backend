@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using MailKit.Net.Smtp;
 using MimeKit;
 using MimeKit.Text;
@@ -19,6 +19,13 @@ namespace EmailService
             var emailMessage = CreateEmailMessage(message);
 
             Send(emailMessage);
+        }
+
+        public async Task SendEmailAsync(Message message)
+        {
+            var mailMessage = CreateEmailMessage(message);
+
+            await SendAsync(mailMessage);
         }
 
         private MimeMessage CreateEmailMessage(Message message)
