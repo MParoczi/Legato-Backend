@@ -5,6 +5,7 @@ using EmailService;
 using Legato.Contexts.Contracts;
 using Legato.Contexts.Repositories;
 using Legato.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -77,7 +78,7 @@ namespace Legato.Extensions
                 options.Password.RequireNonAlphanumeric = true;
 
                 options.SignIn.RequireConfirmedEmail = true;
-            }).AddEntityFrameworkStores<AppContext>();
+            }).AddEntityFrameworkStores<AppContext>().AddDefaultTokenProviders();
         }
 
         /// <summary>
