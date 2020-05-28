@@ -6,5 +6,6 @@ namespace EmailService
     {
         void SendEmail(Message message);
         Task SendEmailAsync(Message message);
+        public string CreateEmailContent(string firstName, string confirmationLink);
     }
 }
