@@ -1,3 +1,4 @@
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using EmailService;
@@ -99,6 +100,25 @@ namespace Legato.Controllers
 
             response.Message = "Registration was successful";
             return Ok(response);
+        }
+
+        /// <summary>
+        ///     Controls the registration confirmation. It redirects to the HarMoney frontend if the confirmation was successful.
+        /// </summary>
+        /// <param name="userEmail">The user's e-mail address where the service has sent the confirmation letter</param>
+        /// <param name="token">The token that validates the registration</param>
+        /// <returns>If the confirmation was successful, the controller will redirect to the HarMoney frontend</returns>
+        [HttpGet]
+        public async Task<IActionResult> ConfirmEmail(string userEmail, string token)
+        {
+            if (userEmail == null || token == null) return BadRequest();
+
+            var user = await UserManager.FindByEmailAsync(userEmail);
+
+            if (user == null) return BadRequest();
+
+            await UserManager.ConfirmEmailAsync(user, token);
+            return Redirect(Environment.GetEnvironmentVariable("LEGATO_FRONTEND"));
         }
     }
 }
