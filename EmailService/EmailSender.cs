@@ -28,6 +28,23 @@ namespace EmailService
             await SendAsync(mailMessage);
         }
 
+        public string CreateEmailContent(string firstName, string confirmationLink)
+        {
+            return $@"
+<div style='font-family: sans-serif; background-color: #383e42; color: #0BDA51'><h1>Dear {firstName},</h1>
+
+<h4>As the whole Legato team, we would like to thank you to register on our website.<br/>
+Before you can proceed, you have to confirm your e-mail address that you have provided at the registration.</h4>
+
+<h3>Please click on the following link: <a href='{confirmationLink}' style='text-decoration: none; color: #FFDB83' onMouseOver='this.style.color=`white`'
+onMouseOut='this.style.color=`#FFDB83`'>Confirm!</a></h3>
+
+If you did not register on the Legato website, please ignore this letter!
+
+<h2>Best Regards,<br/>
+The Legato team</h2></div>";
+        }
+
         private MimeMessage CreateEmailMessage(Message message)
         {
             var emailMessage = new MimeMessage();
@@ -73,22 +90,6 @@ namespace EmailService
                 await client.DisconnectAsync(true);
                 client.Dispose();
             }
-        }
-
-        public string CreateEmailContent(string firstName, string confirmationLink)
-        {
-            return $@"
-Dear {firstName},
-
-As the whole Legato team, we would like to thank you to register on our website.
-Before you can proceed, you have to confirm your e-mail address that you have provided at the registration.
-
-Please click on the following link: {confirmationLink}
-
-If you did not register on the Legato website, please ignore this letter!
-
-Best Regards,
-The Legato team";
         }
     }
 }
