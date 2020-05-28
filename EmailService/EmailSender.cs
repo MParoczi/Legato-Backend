@@ -74,5 +74,21 @@ namespace EmailService
                 client.Dispose();
             }
         }
+
+        public string CreateEmailContent(string firstName, string confirmationLink)
+        {
+            return $@"
+Dear {firstName},
+
+As the whole Legato team, we would like to thank you to register on our website.
+Before you can proceed, you have to confirm your e-mail address that you have provided at the registration.
+
+Please click on the following link: {confirmationLink}
+
+If you did not register on the Legato website, please ignore this letter!
+
+Best Regards,
+The Legato team";
+        }
     }
 }
