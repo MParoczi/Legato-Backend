@@ -31,7 +31,7 @@ namespace EmailService
         public string CreateEmailContent(string firstName, string confirmationLink)
         {
             return $@"
-<div style='font-family: sans-serif; background-color: #383e42; color: #0BDA51'><h1>Dear {firstName},</h1>
+<div style='font-family: sans-serif; background-color: #383e42; color: #0BDA51; padding: 25px; height: 100%'><h1>Dear {firstName},</h1>
 
 <h4>As the whole Legato team, we would like to thank you to register on our website.<br/>
 Before you can proceed, you have to confirm your e-mail address that you have provided at the registration.</h4>
@@ -39,10 +39,13 @@ Before you can proceed, you have to confirm your e-mail address that you have pr
 <h3>Please click on the following link: <a href='{confirmationLink}' style='text-decoration: none; color: #FFDB83' onMouseOver='this.style.color=`white`'
 onMouseOut='this.style.color=`#FFDB83`'>Confirm!</a></h3>
 
-If you did not register on the Legato website, please ignore this letter!
+<h6>If you did not register on the Legato website, please ignore this letter!</h6>
 
 <h2>Best Regards,<br/>
-The Legato team</h2></div>";
+The Legato team</h2>
+<img src='https://i.imgur.com/IvJkUL3.png' alt='logo'>
+<div style='text-align: center; margin-top: 20%'><h6>Legato - 2020</h6></div>
+</div>";
         }
 
         private MimeMessage CreateEmailMessage(Message message)
