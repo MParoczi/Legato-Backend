@@ -1,10 +1,13 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using EmailService;
 using Legato.Contexts.Contracts;
 using Legato.Contexts.Repositories;
 using Legato.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Npgsql;
@@ -66,13 +69,16 @@ namespace Legato.Extensions
             services.AddIdentity<AppUser, AppRole>(options =>
             {
                 options.User.RequireUniqueEmail = true;
+
                 options.Password.RequireDigit = true;
                 options.Password.RequiredLength = 8;
                 options.Password.RequireLowercase = true;
                 options.Password.RequireUppercase = true;
                 options.Password.RequiredUniqueChars = 1;
                 options.Password.RequireNonAlphanumeric = true;
-            }).AddEntityFrameworkStores<AppContext>();
+
+                options.SignIn.RequireConfirmedEmail = true;
+            }).AddEntityFrameworkStores<AppContext>().AddDefaultTokenProviders();
         }
 
         /// <summary>
@@ -101,6 +107,21 @@ namespace Legato.Extensions
                             .AllowCredentials();
                     });
             });
+        }
+
+        /// <summary>
+        ///     Configures the EmailServices that handles the confirmation letter sending
+        /// </summary>
+        /// <param name="services">Specifies the contract for a collection of service descriptors.</param>
+        /// <param name="configuration">Represents a set of key/value application configuration properties.</param>
+        public static void ConfigureEmailService(this IServiceCollection services, IConfiguration configuration)
+        {
+            var emailConfig = configuration
+                .GetSection("EmailConfiguration")
+                .Get<EmailConfiguration>();
+            emailConfig.Password = Environment.GetEnvironmentVariable("LEGATO_EMAIL_PASSWORD");
+            services.AddSingleton(emailConfig);
+            services.AddScoped<IEmailSender, EmailSender>();
         }
     }
 }

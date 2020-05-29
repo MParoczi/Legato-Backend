@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Legato.Extensions;
+using EmailService;
 using Legato.Models;
 using Legato.Utilities;
 using Microsoft.AspNetCore.Identity;
@@ -20,10 +21,13 @@ namespace Legato.Controllers
         /// </summary>
         /// <param name="userManager">Provides the APIs for managing user in a persistence store.</param>
         /// <param name="signInManager">Provides the APIs for user sign in.</param>
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        /// <param name="emailSender">The API for automatized e-mail handling</param>
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
+            IEmailSender emailSender)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            EmailSender = emailSender;
         }
 
         /// <summary>
@@ -35,6 +39,11 @@ namespace Legato.Controllers
         ///     Provides the APIs for user sign in.
         /// </summary>
         private SignInManager<AppUser> SignInManager { get; }
+
+        /// <summary>
+        ///     Provides the APIs for sending automatized e-mails. In this case used for registration confirmation.
+        /// </summary>
+        public IEmailSender EmailSender { get; }
 
         /// <summary>
         ///     Register the user with the information sent in the HTTP post request
@@ -68,6 +77,20 @@ namespace Legato.Controllers
                     LastName = model.LastName
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    var token = await UserManager.GenerateEmailConfirmationTokenAsync(user);
+                    var confirmationLink =
+                        Url.Action("ConfirmEmail", "Account", new {userEmail = user.Email, token},
+                            Request.Scheme);
+
+                    var emailContent = EmailSender.CreateEmailContent(user.FirstName, confirmationLink);
+                    var message = new Message(new[] {user.Email}, "Confirmation letter - Legato",
+                        emailContent);
+
+                    await EmailSender.SendEmailAsync(message);
+                }
             }
             else
             {
@@ -77,6 +100,25 @@ namespace Legato.Controllers
 
             response.Message = "Registration was successful";
             return Ok(response);
+        }
+
+        /// <summary>
+        ///     Controls the registration confirmation. It redirects to the HarMoney frontend if the confirmation was successful.
+        /// </summary>
+        /// <param name="userEmail">The user's e-mail address where the service has sent the confirmation letter</param>
+        /// <param name="token">The token that validates the registration</param>
+        /// <returns>If the confirmation was successful, the controller will redirect to the HarMoney frontend</returns>
+        [HttpGet]
+        public async Task<IActionResult> ConfirmEmail(string userEmail, string token)
+        {
+            if (userEmail == null || token == null) return BadRequest();
+
+            var user = await UserManager.FindByEmailAsync(userEmail);
+
+            if (user == null) return BadRequest();
+
+            await UserManager.ConfirmEmailAsync(user, token);
+            return Redirect(Environment.GetEnvironmentVariable("LEGATO_FRONTEND"));
         }
     }
 }
