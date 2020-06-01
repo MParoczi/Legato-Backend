@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Legato.Models
 {
@@ -21,5 +22,10 @@ namespace Legato.Models
         ///     Secret key for the JWT token
         /// </summary>
         public static readonly string Key = Environment.GetEnvironmentVariable("LEGATO_SECRET_KEY");
+
+        /// <summary>
+        ///     Authentication scheme string for authorization
+        /// </summary>
+        public static readonly string AuthScheme = JwtBearerDefaults.AuthenticationScheme;
     }
 }
