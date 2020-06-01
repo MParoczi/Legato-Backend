@@ -132,8 +132,10 @@ namespace Legato.Controllers
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, true, false);
             if (result.Succeeded)
             {
+                var loggedInUser = new UserDto(user) {Token = CreateToken(user)};
+
                 response.Message = "Login was successful";
-                response.Payload = new UserDto(user);
+                response.Payload = loggedInUser;
                 return Ok(response);
             }
 
@@ -160,7 +162,7 @@ namespace Legato.Controllers
             return Redirect(Environment.GetEnvironmentVariable("LEGATO_FRONTEND"));
         }
 
-        private string CreateToken(UserLogin model)
+        private string CreateToken(AppUser model)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtCredentials.Key));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
