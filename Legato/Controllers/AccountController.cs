@@ -133,7 +133,7 @@ namespace Legato.Controllers
                 return Ok(response);
             }
 
-            response.Message = "Login attempt has failed";
+            response.Message = "Login attempt has failed (invalid username of password)";
             return BadRequest(response);
         }
 
