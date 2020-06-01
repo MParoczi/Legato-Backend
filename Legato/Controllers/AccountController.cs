@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using EmailService;
 using Legato.Models;
 using Legato.Utilities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Legato.Controllers
 {
@@ -154,6 +158,24 @@ namespace Legato.Controllers
 
             await UserManager.ConfirmEmailAsync(user, token);
             return Redirect(Environment.GetEnvironmentVariable("LEGATO_FRONTEND"));
+        }
+
+        private string CreateToken(UserLogin model)
+        {
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtCredentials.Key));
+            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var claims = new[]
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, model.Email),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.UniqueName, model.Email)
+            };
+
+            var token = new JwtSecurityToken(JwtCredentials.Issuer, JwtCredentials.Audience, claims,
+                expires: DateTime.UtcNow.AddMinutes(30), signingCredentials: credentials);
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }
