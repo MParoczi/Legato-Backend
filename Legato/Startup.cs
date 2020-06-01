@@ -63,6 +63,8 @@ namespace Legato
             services.ConfigureCors();
             
             services.ConfigureEmailService(Configuration);
+            
+            services.ConfigureAuthentication();
         }
 
         /// <summary>
