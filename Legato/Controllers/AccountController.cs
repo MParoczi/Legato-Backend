@@ -103,6 +103,41 @@ namespace Legato.Controllers
         }
 
         /// <summary>
+        ///     Login the user with the information sent in the HTTP post request
+        /// </summary>
+        /// <param name="model">Simple POCO object that contains the necessary properties to login the user</param>
+        /// <returns>Defines a contract that represents the result of an action method</returns>
+        [HttpPost]
+        public async Task<IActionResult> Login([FromBody] UserLogin model)
+        {
+            var response = new Response();
+
+            var user = await UserManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                response.Message = "There is no registration under this email address";
+                return BadRequest(response);
+            }
+
+            if (!user.EmailConfirmed)
+            {
+                response.Message = "Email address is not confirmed";
+                return BadRequest(response);
+            }
+
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, true, false);
+            if (result.Succeeded)
+            {
+                response.Message = "Login was successful";
+                response.Payload = new UserDto(user);
+                return Ok(response);
+            }
+
+            response.Message = "Login attempt has failed";
+            return BadRequest(response);
+        }
+
+        /// <summary>
         ///     Controls the registration confirmation. It redirects to the HarMoney frontend if the confirmation was successful.
         /// </summary>
         /// <param name="userEmail">The user's e-mail address where the service has sent the confirmation letter</param>
