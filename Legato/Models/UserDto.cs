@@ -57,5 +57,10 @@ namespace Legato.Models
         ///     Favorite music genres of the user
         /// </summary>
         public List<string> Genres { get; set; }
+
+        /// <summary>
+        ///     JWT Token
+        /// </summary>
+        public string Token { get; set; }
     }
 }
