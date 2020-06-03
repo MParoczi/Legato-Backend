@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -132,7 +132,13 @@ namespace Legato.Controllers
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, true, false);
             if (result.Succeeded)
             {
-                var loggedInUser = new UserDto(user) {Token = CreateToken(user)};
+                var loggedInUser = new UserDto(user);
+
+                var jwt = CreateToken(user);
+                var tokenString = new JwtSecurityTokenHandler().WriteToken(jwt);
+                var tokenExpiration = jwt.ValidTo;
+                
+                loggedInUser.Token = new Jwt(tokenString, tokenExpiration);
 
                 response.Message = "Login was successful";
                 response.Payload = loggedInUser;
