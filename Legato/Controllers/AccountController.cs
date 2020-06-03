@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -162,7 +162,7 @@ namespace Legato.Controllers
             return Redirect(Environment.GetEnvironmentVariable("LEGATO_FRONTEND"));
         }
 
-        private string CreateToken(AppUser model)
+        private JwtSecurityToken CreateToken(AppUser model)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtCredentials.Key));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -177,7 +177,7 @@ namespace Legato.Controllers
             var token = new JwtSecurityToken(JwtCredentials.Issuer, JwtCredentials.Audience, claims,
                 expires: DateTime.UtcNow.AddMinutes(15), signingCredentials: credentials);
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            return token;
         }
     }
 }
