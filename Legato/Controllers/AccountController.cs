@@ -175,7 +175,7 @@ namespace Legato.Controllers
             };
 
             var token = new JwtSecurityToken(JwtCredentials.Issuer, JwtCredentials.Audience, claims,
-                expires: DateTime.UtcNow.AddMinutes(30), signingCredentials: credentials);
+                expires: DateTime.UtcNow.AddMinutes(15), signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
