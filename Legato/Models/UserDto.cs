@@ -61,6 +61,6 @@ namespace Legato.Models
         /// <summary>
         ///     JWT Token
         /// </summary>
-        public string Token { get; set; }
+        public Jwt Token { get; set; }
     }
 }
