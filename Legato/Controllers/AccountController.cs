@@ -137,7 +137,7 @@ namespace Legato.Controllers
                 var jwt = CreateToken(user);
                 var tokenString = new JwtSecurityTokenHandler().WriteToken(jwt);
                 var tokenExpiration = jwt.ValidTo;
-                
+
                 loggedInUser.Token = new Jwt(tokenString, tokenExpiration);
 
                 response.Message = "Login was successful";
@@ -146,6 +146,30 @@ namespace Legato.Controllers
             }
 
             response.Message = "Login attempt has failed (invalid username of password)";
+            return BadRequest(response);
+        }
+
+        /// <summary>
+        ///     Logout the user
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Simple POCO object that contains the necessary properties to logout the user</returns>
+        [HttpPost]
+        public async Task<IActionResult> Logout([FromBody] UserDto model)
+        {
+            var response = new Response();
+
+            if (ModelState.IsValid)
+            {
+                var user = await UserManager.FindByEmailAsync(model.Email);
+                await UserManager.UpdateSecurityStampAsync(user);
+
+                await SignInManager.SignOutAsync();
+                response.Message = "Logout was successful";
+                return Ok(response);
+            }
+
+            response.Message = "Logout attempt has failed";
             return BadRequest(response);
         }
 
