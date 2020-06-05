@@ -116,33 +116,36 @@ namespace Legato.Controllers
         {
             var response = new Response();
 
-            var user = await UserManager.FindByEmailAsync(model.Email);
-            if (user == null)
+            if (ModelState.IsValid)
             {
-                response.Message = "There is no registration under this email address";
-                return BadRequest(response);
-            }
+                var user = await UserManager.FindByEmailAsync(model.Email);
+                if (user == null)
+                {
+                    response.Message = "There is no registration under this email address";
+                    return BadRequest(response);
+                }
 
-            if (!user.EmailConfirmed)
-            {
-                response.Message = "Email address is not confirmed";
-                return BadRequest(response);
-            }
+                if (!user.EmailConfirmed)
+                {
+                    response.Message = "Email address is not confirmed";
+                    return BadRequest(response);
+                }
 
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, true, false);
-            if (result.Succeeded)
-            {
-                var loggedInUser = new UserDto(user);
+                var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, true, false);
+                if (result.Succeeded)
+                {
+                    var loggedInUser = new UserDto(user);
 
-                var jwt = CreateToken(user);
-                var tokenString = new JwtSecurityTokenHandler().WriteToken(jwt);
-                var tokenExpiration = jwt.ValidTo;
+                    var jwt = CreateToken(user);
+                    var tokenString = new JwtSecurityTokenHandler().WriteToken(jwt);
+                    var tokenExpiration = jwt.ValidTo;
 
-                loggedInUser.Token = new Jwt(tokenString, tokenExpiration);
+                    loggedInUser.Token = new Jwt(tokenString, tokenExpiration);
 
-                response.Message = "Login was successful";
-                response.Payload = loggedInUser;
-                return Ok(response);
+                    response.Message = "Login was successful";
+                    response.Payload = loggedInUser;
+                    return Ok(response);
+                }
             }
 
             response.Message = "Login attempt has failed (invalid username of password)";
