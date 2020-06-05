@@ -44,5 +44,12 @@ namespace Legato.Models
         [Required]
         [ProtectedPersonalData]
         public List<string> Genres { get; set; }
+
+        /// <summary>
+        ///     JWT refresh token
+        /// </summary>
+        [Required]
+        [ProtectedPersonalData]
+        public string RefreshToken { get; set; }
     }
 }
