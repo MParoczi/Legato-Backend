@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using EmailService;
+using Legato.Contexts.Contracts;
 using Legato.Models;
 using Legato.Utilities;
 using Microsoft.AspNetCore.Identity;
@@ -27,11 +28,12 @@ namespace Legato.Controllers
         /// <param name="signInManager">Provides the APIs for user sign in.</param>
         /// <param name="emailSender">The API for automatized e-mail handling</param>
         public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
-            IEmailSender emailSender)
+            IEmailSender emailSender, IRepositoryWrapper repository)
         {
             UserManager = userManager;
             SignInManager = signInManager;
             EmailSender = emailSender;
+            Repository = repository;
         }
 
         /// <summary>
@@ -48,6 +50,11 @@ namespace Legato.Controllers
         ///     Provides the APIs for sending automatized e-mails. In this case used for registration confirmation.
         /// </summary>
         public IEmailSender EmailSender { get; }
+
+        /// <summary>
+        ///     Repository for the database context
+        /// </summary>
+        public IRepositoryWrapper Repository { get; }
 
         /// <summary>
         ///     Register the user with the information sent in the HTTP post request
