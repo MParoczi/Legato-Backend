@@ -29,7 +29,7 @@ namespace Legato.Contexts.Repositories
         /// </summary>
         public void Save()
         {
-            _context.SaveChanges();
+            _context.SaveChangesAsync();
         }
     }
 }
