@@ -85,8 +85,9 @@ namespace Legato.Controllers
                     Email = model.Email,
                     Genres = new List<string>(model.Genres),
                     FirstName = model.FirstName,
-                    LastName = model.LastName
+                    LastName = model.LastName,
                 };
+                user.RefreshToken = new JwtSecurityTokenHandler().WriteToken(CreateToken(user));
                 var result = await UserManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
