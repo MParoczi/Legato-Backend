@@ -8,6 +8,7 @@ using EmailService;
 using Legato.Contexts.Contracts;
 using Legato.Models;
 using Legato.Utilities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -153,6 +154,10 @@ namespace Legato.Controllers
 
                     response.Message = "Login was successful";
                     response.Payload = loggedInUser;
+
+                    HttpContext.Response.Cookies.Append("REFRESH_TOKEN", user.RefreshToken,
+                        new CookieOptions {HttpOnly = true});
+
                     return Ok(response);
                 }
             }
