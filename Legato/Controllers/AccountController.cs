@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -89,7 +89,7 @@ namespace Legato.Controllers
                     FirstName = model.FirstName,
                     LastName = model.LastName
                 };
-                user.RefreshToken = new JwtSecurityTokenHandler().WriteToken(CreateToken(user));
+                user.RefreshToken = CreateRefreshToken(user);
                 var result = await UserManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
@@ -146,11 +146,7 @@ namespace Legato.Controllers
                 {
                     var loggedInUser = new UserDto(user);
 
-                    var jwt = CreateToken(user);
-                    var tokenString = new JwtSecurityTokenHandler().WriteToken(jwt);
-                    var tokenExpiration = jwt.ValidTo;
-
-                    loggedInUser.Token = new Jwt(tokenString, tokenExpiration);
+                    loggedInUser.Token = CreateJwtPayload(user);
 
                     response.Message = "Login was successful";
                     response.Payload = loggedInUser;
@@ -183,9 +179,9 @@ namespace Legato.Controllers
 
                 await SignInManager.SignOutAsync();
                 response.Message = "Logout was successful";
-                
+
                 HttpContext.Response.Cookies.Delete("REFRESH_TOKEN");
-                
+
                 return Ok(response);
             }
 
@@ -200,7 +196,7 @@ namespace Legato.Controllers
         /// <param name="token">The token that validates the registration</param>
         /// <returns>If the confirmation was successful, the controller will redirect to the HarMoney frontend</returns>
         [HttpGet]
-        public async Task<IActionResult> ConfirmEmail([FromQuery]string userEmail, string token)
+        public async Task<IActionResult> ConfirmEmail([FromQuery] string userEmail, string token)
         {
             if (userEmail == null || token == null) return BadRequest();
 
@@ -228,6 +224,20 @@ namespace Legato.Controllers
                 expires: DateTime.UtcNow.AddMinutes(15), signingCredentials: credentials);
 
             return token;
+        }
+
+        private Jwt CreateJwtPayload(AppUser user)
+        {
+            var jwt = CreateToken(user);
+            var tokenString = new JwtSecurityTokenHandler().WriteToken(jwt);
+            var tokenExpiration = jwt.ValidTo;
+            var token = new Jwt(tokenString, tokenExpiration);
+            return token;
+        }
+
+        private string CreateRefreshToken(AppUser user)
+        {
+            return new JwtSecurityTokenHandler().WriteToken(CreateToken(user));
         }
     }
 }
