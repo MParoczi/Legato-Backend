@@ -2,6 +2,7 @@
 
 namespace Legato.Migrations
 {
+#pragma warning disable CS1591
     public partial class AddRefreshToken : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,4 +21,5 @@ namespace Legato.Migrations
                 table: "AspNetUsers");
         }
     }
+#pragma warning restore CS1591
 }

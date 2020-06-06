@@ -10,6 +10,7 @@ using AppContext = Legato.Contexts.AppContext;
 
 namespace Legato.Migrations
 {
+#pragma warning disable CS1591
     [DbContext(typeof(AppContext))]
     [Migration("20200605131837_AddRefreshToken")]
     partial class AddRefreshToken
@@ -293,4 +294,5 @@ namespace Legato.Migrations
 #pragma warning restore 612, 618
         }
     }
+#pragma warning restore CS1591
 }
