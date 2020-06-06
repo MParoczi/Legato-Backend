@@ -156,7 +156,7 @@ namespace Legato.Controllers
                     response.Payload = loggedInUser;
 
                     HttpContext.Response.Cookies.Append("REFRESH_TOKEN", user.RefreshToken,
-                        new CookieOptions {HttpOnly = true});
+                        new CookieOptions {HttpOnly = true, Expires = DateTimeOffset.MaxValue});
 
                     return Ok(response);
                 }
