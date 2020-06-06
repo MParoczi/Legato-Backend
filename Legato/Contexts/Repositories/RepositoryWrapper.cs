@@ -1,4 +1,5 @@
-﻿using Legato.Contexts.Contracts;
+﻿using System.Threading.Tasks;
+using Legato.Contexts.Contracts;
 
 namespace Legato.Contexts.Repositories
 {
@@ -27,9 +28,9 @@ namespace Legato.Contexts.Repositories
         /// <summary>
         ///     Save changes in the database
         /// </summary>
-        public void Save()
+        public Task Save()
         {
-            _context.SaveChangesAsync();
+            return _context.SaveChangesAsync();
         }
     }
 }
