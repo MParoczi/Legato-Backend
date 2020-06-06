@@ -183,6 +183,9 @@ namespace Legato.Controllers
 
                 await SignInManager.SignOutAsync();
                 response.Message = "Logout was successful";
+                
+                HttpContext.Response.Cookies.Delete("REFRESH_TOKEN");
+                
                 return Ok(response);
             }
 
