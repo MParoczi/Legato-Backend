@@ -1,6 +1,7 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -187,6 +188,45 @@ namespace Legato.Controllers
 
             response.Message = "Logout attempt has failed";
             return BadRequest(response);
+        }
+
+        /// <summary>
+        ///     Refreshes the invalid JWT token and refreshes the refresh token as well
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> RefreshToken()
+        {
+            var response = new Response();
+
+            var refreshToken = HttpContext.Request.Cookies.FirstOrDefault(cookie => cookie.Key == "REFRESH_TOKEN")
+                .Value;
+
+            if (refreshToken != null)
+            {
+                var user = Repository.User.FindByCondition(u => u.RefreshToken == refreshToken).FirstOrDefault();
+
+                if (user != null)
+                {
+                    var token = CreateJwtPayload(user);
+                    var newRefreshToken = CreateRefreshToken(user);
+
+                    response.Message = "New token was given";
+                    response.Payload = token;
+
+                    user.RefreshToken = newRefreshToken;
+                    Repository.User.Update(user);
+                    await Repository.Save();
+
+                    HttpContext.Response.Cookies.Append("REFRESH_TOKEN", newRefreshToken,
+                        new CookieOptions {HttpOnly = true, Expires = DateTimeOffset.MaxValue});
+
+                    return Ok(response);
+                }
+            }
+
+            response.Message = "Couldn't refresh the token";
+            return Unauthorized(response);
         }
 
         /// <summary>
