@@ -200,7 +200,7 @@ namespace Legato.Controllers
         /// <param name="token">The token that validates the registration</param>
         /// <returns>If the confirmation was successful, the controller will redirect to the HarMoney frontend</returns>
         [HttpGet]
-        public async Task<IActionResult> ConfirmEmail(string userEmail, string token)
+        public async Task<IActionResult> ConfirmEmail([FromQuery]string userEmail, string token)
         {
             if (userEmail == null || token == null) return BadRequest();
 
