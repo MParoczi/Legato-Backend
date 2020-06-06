@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -27,6 +27,7 @@ namespace Legato.Controllers
         /// <param name="userManager">Provides the APIs for managing user in a persistence store.</param>
         /// <param name="signInManager">Provides the APIs for user sign in.</param>
         /// <param name="emailSender">The API for automatized e-mail handling</param>
+        /// <param name="repository">Repository pattern access point</param>
         public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
             IEmailSender emailSender, IRepositoryWrapper repository)
         {
