@@ -58,9 +58,9 @@ namespace Legato.Contexts.Repositories
         ///     Creates a new record in the database
         /// </summary>
         /// <param name="entity">Generic model class</param>
-        public void Create(T entity)
+        public async void Create(T entity)
         {
-            AppContext.Set<T>().Add(entity);
+            await AppContext.Set<T>().AddAsync(entity);
         }
 
         /// <summary>
