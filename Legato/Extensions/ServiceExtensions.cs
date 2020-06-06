@@ -132,7 +132,11 @@ namespace Legato.Extensions
         /// <param name="services">Specifies the contract for a collection of service descriptors.</param>
         public static void ConfigureAuthentication(this IServiceCollection services)
         {
-            services.AddAuthentication().AddJwtBearer(cfg =>
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = "Bearer";
+                options.DefaultChallengeScheme = "Bearer";
+            }).AddJwtBearer(cfg =>
                 cfg.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidIssuer = JwtCredentials.Issuer, ValidAudience = JwtCredentials.Audience,
