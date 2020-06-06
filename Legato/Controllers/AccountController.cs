@@ -230,6 +230,38 @@ namespace Legato.Controllers
         }
 
         /// <summary>
+        ///     Checks whether there is a logged in user and return a new UserDto object for the frontend
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult GetCurrentUser()
+        {
+            var response = new Response();
+            var refreshToken = HttpContext.Request.Cookies.FirstOrDefault(cookie => cookie.Key == "REFRESH_TOKEN")
+                .Value;
+
+            if (refreshToken != null)
+            {
+                var user = Repository.User.FindByCondition(u => u.RefreshToken == refreshToken).FirstOrDefault();
+
+                if (user != null)
+                {
+                    var loggedInUser = new UserDto(user);
+
+                    loggedInUser.Token = CreateJwtPayload(user);
+
+                    response.Message = "Logged in user was found";
+                    response.Payload = loggedInUser;
+
+                    return Ok(response);
+                }
+            }
+
+            response.Message = "Logged in user was not found";
+            return Unauthorized(response);
+        }
+
+        /// <summary>
         ///     Controls the registration confirmation. It redirects to the HarMoney frontend if the confirmation was successful.
         /// </summary>
         /// <param name="userEmail">The user's e-mail address where the service has sent the confirmation letter</param>
