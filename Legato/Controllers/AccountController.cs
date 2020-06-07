@@ -250,7 +250,7 @@ namespace Legato.Controllers
 
                     loggedInUser.Token = CreateJwtPayload(user);
 
-                    response.Message = "Logged in user was found";
+                    response.Message = "Welcome back!";
                     response.Payload = loggedInUser;
 
                     return Ok(response);
