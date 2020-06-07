@@ -24,6 +24,13 @@ namespace Legato.Models
         }
 
         /// <summary>
+        ///     Default constructor
+        /// </summary>
+        public UserDto()
+        {
+        }
+
+        /// <summary>
         ///     Unique id of the user
         /// </summary>
         public int Id { get; set; }
