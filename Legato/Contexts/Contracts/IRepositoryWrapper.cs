@@ -1,4 +1,6 @@
-﻿namespace Legato.Contexts.Contracts
+﻿using System.Threading.Tasks;
+
+namespace Legato.Contexts.Contracts
 {
     /// <summary>
     ///     Wraps the repositories
@@ -13,6 +15,6 @@
         /// <summary>
         ///     Save changes in the database
         /// </summary>
-        void Save();
+        Task Save();
     }
 }

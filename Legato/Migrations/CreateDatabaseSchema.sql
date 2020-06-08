@@ -45,6 +45,7 @@ CREATE TABLE IF NOT EXISTS "AspNetUsers"
     "Birthdate"            timestamp without time zone NOT NULL,
     "Country"              text                        NOT NULL,
     "Genres"               text                        NOT NULL,
+    "RefreshToken"         text                        NOT NULL,
     CONSTRAINT "PK_AspNetUsers" PRIMARY KEY ("Id")
 );
 

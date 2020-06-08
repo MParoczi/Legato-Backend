@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using System.Text;
 using EmailService;
 using Legato.Contexts.Contracts;
 using Legato.Contexts.Repositories;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Npgsql;
 using AppContext = Legato.Contexts.AppContext;
@@ -122,6 +124,24 @@ namespace Legato.Extensions
             emailConfig.Password = Environment.GetEnvironmentVariable("LEGATO_EMAIL_PASSWORD");
             services.AddSingleton(emailConfig);
             services.AddScoped<IEmailSender, EmailSender>();
+        }
+
+        /// <summary>
+        ///     Configures the Authentication system
+        /// </summary>
+        /// <param name="services">Specifies the contract for a collection of service descriptors.</param>
+        public static void ConfigureAuthentication(this IServiceCollection services)
+        {
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = "Bearer";
+                options.DefaultChallengeScheme = "Bearer";
+            }).AddJwtBearer(cfg =>
+                cfg.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidIssuer = JwtCredentials.Issuer, ValidAudience = JwtCredentials.Audience,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtCredentials.Key))
+                });
         }
     }
 }
