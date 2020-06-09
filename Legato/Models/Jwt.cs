@@ -19,6 +19,13 @@ namespace Legato.Models
         }
 
         /// <summary>
+        ///     Default constructor
+        /// </summary>
+        public Jwt()
+        {
+        }
+
+        /// <summary>
         ///     Token string
         /// </summary>
         public string Token { get; }
