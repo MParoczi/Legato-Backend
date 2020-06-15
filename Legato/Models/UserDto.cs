@@ -69,5 +69,10 @@ namespace Legato.Models
         ///     JWT Token
         /// </summary>
         public Jwt Token { get; set; }
+
+        /// <summary>
+        ///     Cloudinary URL for the user's profile picture
+        /// </summary>
+        public string ProfilePicture { get; set; }
     }
 }
