@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
@@ -259,6 +259,33 @@ namespace Legato.Controllers
 
             response.Message = "Logged in user was not found";
             return Unauthorized(response);
+        }
+
+        /// <summary>
+        ///     Handler to change the profile picture of the user
+        /// </summary>
+        /// <param name="model">Simple POCO object that represents the logged in user</param>
+        /// <returns>Defines a contract that represents the result of an action method</returns>
+        [HttpPost]
+        public async Task<IActionResult> ChangeProfilePicture([FromBody] UserDto model)
+        {
+            var response = new Response();
+
+            if (ModelState.IsValid)
+            {
+                var user = await UserManager.FindByEmailAsync(model.Email);
+                user.ProfilePicture = model.ProfilePicture;
+
+                Repository.User.Update(user);
+                await Repository.Save();
+
+                response.Message = "Profile picture has been changed";
+                response.Payload = model;
+                return Ok(response);
+            }
+
+            response.Message = "Profile picture change has failed";
+            return BadRequest(response);
         }
 
         /// <summary>
