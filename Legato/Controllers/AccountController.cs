@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
@@ -166,7 +166,7 @@ namespace Legato.Controllers
         /// <summary>
         ///     Logout the user
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">Simple POCO object that represents the logged in user</param>
         /// <returns>Simple POCO object that contains the necessary properties to logout the user</returns>
         [HttpPost]
         public async Task<IActionResult> Logout([FromBody] UserDto model)
@@ -193,7 +193,7 @@ namespace Legato.Controllers
         /// <summary>
         ///     Refreshes the invalid JWT token and refreshes the refresh token as well
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Defines a contract that represents the result of an action method</returns>
         [HttpPost]
         public async Task<IActionResult> RefreshToken()
         {
@@ -232,7 +232,7 @@ namespace Legato.Controllers
         /// <summary>
         ///     Checks whether there is a logged in user and return a new UserDto object for the frontend
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A simple HTTP response whether the current user is founded or not</returns>
         [HttpPost]
         public IActionResult GetCurrentUser()
         {
