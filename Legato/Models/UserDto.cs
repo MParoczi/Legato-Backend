@@ -21,6 +21,7 @@ namespace Legato.Models
             Email = user.Email;
             Country = user.Country;
             Genres = user.Genres;
+            ProfilePicture = user.ProfilePicture;
         }
 
         /// <summary>
