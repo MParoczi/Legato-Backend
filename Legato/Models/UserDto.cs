@@ -21,6 +21,7 @@ namespace Legato.Models
             Email = user.Email;
             Country = user.Country;
             Genres = user.Genres;
+            ProfilePicture = user.ProfilePicture;
         }
 
         /// <summary>
@@ -69,5 +70,10 @@ namespace Legato.Models
         ///     JWT Token
         /// </summary>
         public Jwt Token { get; set; }
+
+        /// <summary>
+        ///     Cloudinary URL for the user's profile picture
+        /// </summary>
+        public string ProfilePicture { get; set; }
     }
 }
