@@ -9,6 +9,7 @@ using EmailService;
 using Legato.Contexts.Contracts;
 using Legato.Models;
 using Legato.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -267,6 +268,7 @@ namespace Legato.Controllers
         /// <param name="model">Simple POCO object that represents the logged in user</param>
         /// <returns>Defines a contract that represents the result of an action method</returns>
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> ChangeProfilePicture([FromBody] UserDto model)
         {
             var response = new Response();
