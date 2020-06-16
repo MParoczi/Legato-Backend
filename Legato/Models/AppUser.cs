@@ -51,5 +51,11 @@ namespace Legato.Models
         [Required]
         [ProtectedPersonalData]
         public string RefreshToken { get; set; }
+        
+        /// <summary>
+        ///     Cloudinary URL for the user's profile picture
+        /// </summary>
+        [ProtectedPersonalData]
+        public string ProfilePicture { get; set; }
     }
 }

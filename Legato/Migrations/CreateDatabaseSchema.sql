@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS "AspNetUsers"
     "Country"              text                        NOT NULL,
     "Genres"               text                        NOT NULL,
     "RefreshToken"         text                        NOT NULL,
+    "ProfilePicture"       text                        NULL,
     CONSTRAINT "PK_AspNetUsers" PRIMARY KEY ("Id")
 );
 

@@ -9,6 +9,7 @@ using EmailService;
 using Legato.Contexts.Contracts;
 using Legato.Models;
 using Legato.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -166,7 +167,7 @@ namespace Legato.Controllers
         /// <summary>
         ///     Logout the user
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">Simple POCO object that represents the logged in user</param>
         /// <returns>Simple POCO object that contains the necessary properties to logout the user</returns>
         [HttpPost]
         public async Task<IActionResult> Logout([FromBody] UserDto model)
@@ -193,7 +194,7 @@ namespace Legato.Controllers
         /// <summary>
         ///     Refreshes the invalid JWT token and refreshes the refresh token as well
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Defines a contract that represents the result of an action method</returns>
         [HttpPost]
         public async Task<IActionResult> RefreshToken()
         {
@@ -232,7 +233,7 @@ namespace Legato.Controllers
         /// <summary>
         ///     Checks whether there is a logged in user and return a new UserDto object for the frontend
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A simple HTTP response whether the current user is founded or not</returns>
         [HttpPost]
         public IActionResult GetCurrentUser()
         {
@@ -259,6 +260,34 @@ namespace Legato.Controllers
 
             response.Message = "Logged in user was not found";
             return Unauthorized(response);
+        }
+
+        /// <summary>
+        ///     Handler to change the profile picture of the user
+        /// </summary>
+        /// <param name="model">Simple POCO object that represents the logged in user</param>
+        /// <returns>Defines a contract that represents the result of an action method</returns>
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> ChangeProfilePicture([FromBody] UserDto model)
+        {
+            var response = new Response();
+
+            if (ModelState.IsValid)
+            {
+                var user = await UserManager.FindByEmailAsync(model.Email);
+                user.ProfilePicture = model.ProfilePicture;
+
+                Repository.User.Update(user);
+                await Repository.Save();
+
+                response.Message = "Profile picture has been changed";
+                response.Payload = model;
+                return Ok(response);
+            }
+
+            response.Message = "Profile picture change has failed";
+            return BadRequest(response);
         }
 
         /// <summary>
