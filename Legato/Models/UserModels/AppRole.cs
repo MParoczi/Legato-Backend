@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace Legato.Models
+namespace Legato.Models.UserModels
 {
     /// <summary>
     ///     Represents an application role that can be requested by (and granted to) a client application, or that can be used

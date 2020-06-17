@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 
-namespace Legato.Models
+namespace Legato.Models.UserModels
 {
     /// <summary>
     ///     The main user model that is provided for the identity

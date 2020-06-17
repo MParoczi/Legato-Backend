@@ -1,5 +1,6 @@
 ﻿using Legato.Contexts.Configuration;
 using Legato.Models;
+using Legato.Models.UserModels;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

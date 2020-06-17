@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Legato.Models
+namespace Legato.Models.UserModels
 {
     /// <summary>
     ///     Simple POCO object to transfer user information to the frontend

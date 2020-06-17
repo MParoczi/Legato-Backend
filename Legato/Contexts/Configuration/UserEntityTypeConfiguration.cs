@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Legato.Models;
+using Legato.Models.UserModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Newtonsoft.Json;
