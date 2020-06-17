@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Legato.Models.AuthorizationModels;
 
 namespace Legato.Models.UserModels
 {

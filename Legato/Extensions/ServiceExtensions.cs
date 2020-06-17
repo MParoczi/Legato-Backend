@@ -6,6 +6,7 @@ using EmailService;
 using Legato.Contexts.Contracts;
 using Legato.Contexts.Repositories;
 using Legato.Models;
+using Legato.Models.AuthorizationModels;
 using Legato.Models.UserModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

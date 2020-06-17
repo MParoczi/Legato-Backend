@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Legato.Models
+namespace Legato.Models.AuthorizationModels
 {
     /// <summary>
     ///     POCO object for the JWT

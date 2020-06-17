@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using EmailService;
 using Legato.Contexts.Contracts;
 using Legato.Models;
+using Legato.Models.AuthorizationModels;
 using Legato.Models.UserModels;
 using Legato.Utilities;
 using Microsoft.AspNetCore.Authorization;
