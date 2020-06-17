@@ -1,5 +1,5 @@
 ﻿using Legato.Contexts.Configuration;
-using Legato.Models;
+using Legato.Models.PostModel;
 using Legato.Models.UserModels;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +19,11 @@ namespace Legato.Contexts
         public AppContext(DbContextOptions<AppContext> options) : base(options)
         {
         }
+
+        /// <summary>
+        ///     DbSet that represents the post persisted in the database
+        /// </summary>
+        public DbSet<Post> Posts { get; set; }
 
         /// <summary>
         ///     Configures the schema needed for the identity framework.
