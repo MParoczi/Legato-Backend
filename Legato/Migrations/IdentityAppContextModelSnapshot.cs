@@ -19,7 +19,31 @@ namespace Legato.Migrations
                 .HasAnnotation("ProductVersion", "3.1.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("Legato.Models.AppRole", b =>
+            modelBuilder.Entity("Legato.Models.PostModel.Post", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("integer")
+                    .HasAnnotation("Npgsql:ValueGenerationStrategy",
+                        NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                b.Property<string>("Content")
+                    .HasColumnType("text");
+
+                b.Property<string>("Title")
+                    .HasColumnType("text");
+
+                b.Property<int>("UserId")
+                    .HasColumnType("integer");
+
+                b.HasKey("Id");
+
+                b.HasIndex("UserId");
+
+                b.ToTable("Posts");
+            });
+
+            modelBuilder.Entity("Legato.Models.UserModels.AppRole", b =>
             {
                 b.Property<int>("Id")
                     .ValueGeneratedOnAdd()
@@ -48,7 +72,7 @@ namespace Legato.Migrations
                 b.ToTable("AspNetRoles");
             });
 
-            modelBuilder.Entity("Legato.Models.AppUser", b =>
+            modelBuilder.Entity("Legato.Models.UserModels.AppUser", b =>
             {
                 b.Property<int>("Id")
                     .ValueGeneratedOnAdd()
@@ -244,9 +268,18 @@ namespace Legato.Migrations
                 b.ToTable("AspNetUserTokens");
             });
 
+            modelBuilder.Entity("Legato.Models.PostModel.Post", b =>
+            {
+                b.HasOne("Legato.Models.UserModels.AppUser", "User")
+                    .WithMany("Posts")
+                    .HasForeignKey("UserId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
             {
-                b.HasOne("Legato.Models.AppRole", null)
+                b.HasOne("Legato.Models.UserModels.AppRole", null)
                     .WithMany()
                     .HasForeignKey("RoleId")
                     .OnDelete(DeleteBehavior.Cascade)
@@ -255,7 +288,7 @@ namespace Legato.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
             {
-                b.HasOne("Legato.Models.AppUser", null)
+                b.HasOne("Legato.Models.UserModels.AppUser", null)
                     .WithMany()
                     .HasForeignKey("UserId")
                     .OnDelete(DeleteBehavior.Cascade)
@@ -264,7 +297,7 @@ namespace Legato.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
             {
-                b.HasOne("Legato.Models.AppUser", null)
+                b.HasOne("Legato.Models.UserModels.AppUser", null)
                     .WithMany()
                     .HasForeignKey("UserId")
                     .OnDelete(DeleteBehavior.Cascade)
@@ -273,13 +306,13 @@ namespace Legato.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
             {
-                b.HasOne("Legato.Models.AppRole", null)
+                b.HasOne("Legato.Models.UserModels.AppRole", null)
                     .WithMany()
                     .HasForeignKey("RoleId")
                     .OnDelete(DeleteBehavior.Cascade)
                     .IsRequired();
 
-                b.HasOne("Legato.Models.AppUser", null)
+                b.HasOne("Legato.Models.UserModels.AppUser", null)
                     .WithMany()
                     .HasForeignKey("UserId")
                     .OnDelete(DeleteBehavior.Cascade)
@@ -288,7 +321,7 @@ namespace Legato.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
             {
-                b.HasOne("Legato.Models.AppUser", null)
+                b.HasOne("Legato.Models.UserModels.AppUser", null)
                     .WithMany()
                     .HasForeignKey("UserId")
                     .OnDelete(DeleteBehavior.Cascade)
