@@ -10,6 +10,7 @@ using Legato.Contexts.Contracts;
 using Legato.Models;
 using Legato.Models.AuthorizationModels;
 using Legato.Models.UserModels;
+using Legato.Models.UtilityModels;
 using Legato.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

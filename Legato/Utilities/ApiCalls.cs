@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Legato.Models;
+using Legato.Models.UtilityModels;
 using Newtonsoft.Json.Linq;
 
 namespace Legato.Utilities
