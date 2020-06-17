@@ -33,6 +33,7 @@ namespace Legato.Contexts
         {
             base.OnModelCreating(builder);
             builder.ApplyConfiguration(new UserEntityTypeConfiguration());
+            builder.ApplyConfiguration(new PostEntityTypeConfiguration());
         }
     }
 }
