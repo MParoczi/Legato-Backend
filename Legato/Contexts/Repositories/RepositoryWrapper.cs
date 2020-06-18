@@ -9,6 +9,7 @@ namespace Legato.Contexts.Repositories
     public class RepositoryWrapper : IRepositoryWrapper
     {
         private readonly AppContext _context;
+        private IPostRepository _post;
         private IUserRepository _user;
 
         /// <summary>
@@ -24,6 +25,11 @@ namespace Legato.Contexts.Repositories
         ///     UserRepository class that contains methods to alter the user entity in the database
         /// </summary>
         public IUserRepository User => _user ??= new UserRepository(_context);
+
+        /// <summary>
+        ///     PostRepository class that contains methods to alter the post entity in the database
+        /// </summary>
+        public IPostRepository Post => _post ??= new PostRepository(_context);
 
         /// <summary>
         ///     Save changes in the database
