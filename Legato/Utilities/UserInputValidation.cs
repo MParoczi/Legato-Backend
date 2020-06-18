@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Legato.Models;
 using Legato.Models.UserModels;
 
 namespace Legato.Utilities

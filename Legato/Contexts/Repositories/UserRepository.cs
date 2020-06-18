@@ -1,5 +1,4 @@
 ﻿using Legato.Contexts.Contracts;
-using Legato.Models;
 using Legato.Models.UserModels;
 
 namespace Legato.Contexts.Repositories
