@@ -40,7 +40,7 @@ namespace Legato.Controllers
         /// </summary>
         /// <returns>Every posts of a user from the database</returns>
         /// <remarks>GET: api/Post/GetUserPosts</remarks>
-        [HttpGet]
+        [HttpPost]
         public IActionResult GetUserPosts([FromBody] UserDto model)
         {
             var response = new Response();
