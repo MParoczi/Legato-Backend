@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
@@ -117,7 +117,7 @@ namespace Legato.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns>Defines a contract that represents the result of an action method</returns>
-        /// <remarks>POST: api/Post</remarks>
+        /// <remarks>POST: api/Post/Add</remarks>
         [HttpPost]
         public async Task<ActionResult<Post>> Add([FromBody] Post model)
         {
