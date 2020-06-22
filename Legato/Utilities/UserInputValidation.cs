@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -83,6 +83,17 @@ namespace Legato.Utilities
             }
         }
 
+        /// <summary>
+        ///     Validates the user's inputs given at posting
+        /// </summary>
+        /// <returns>Boolean value whether every value is valid or not</returns>
+        public bool PostIsValid()
+        {
+            ValidatePostTitle(_post.Title);
+            ValidatePostContent(_post.Content);
+            return true;
+        }
+
         private bool ValidateName(string name)
         {
             if (name == null) throw new ValidationException();
@@ -159,6 +170,20 @@ namespace Legato.Utilities
                 @"^(([^<>()\[\]\\.,;:\s@]+(\.[^<>()\[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$");
 
             if (!match.Success) throw new ValidationException();
+
+            return true;
+        }
+
+        private bool ValidatePostTitle(string title)
+        {
+            if (title == null) throw new ValidationException();
+
+            return true;
+        }
+
+        private bool ValidatePostContent(string content)
+        {
+            if (content == null) throw new ValidationException();
 
             return true;
         }
