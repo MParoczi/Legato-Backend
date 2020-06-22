@@ -89,9 +89,16 @@ namespace Legato.Utilities
         /// <returns>Boolean value whether every value is valid or not</returns>
         public bool PostIsValid()
         {
-            ValidatePostTitle(_post.Title);
-            ValidatePostContent(_post.Content);
-            return true;
+            try
+            {
+                ValidatePostTitle(_post.Title);
+                ValidatePostContent(_post.Content);
+                return true;
+            }
+            catch (ValidationException)
+            {
+                return false;
+            }
         }
 
         private bool ValidateName(string name)
