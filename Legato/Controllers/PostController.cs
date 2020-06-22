@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 using Legato.Contexts.Contracts;
 using Legato.Models.PostModel;
+using Legato.Models.UserModels;
 using Legato.Models.UtilityModels;
 using Legato.Utilities;
 using Microsoft.AspNetCore.Authorization;
@@ -35,16 +36,25 @@ namespace Legato.Controllers
         private IRepositoryWrapper Repository { get; }
 
         /// <summary>
-        ///     Get every posts that is persisted in the database
+        ///     Get every posts of a user that is persisted in the database
         /// </summary>
-        /// <returns>Every posts from the database</returns>
-        /// <remarks>GET: api/Post</remarks>
+        /// <returns>Every posts of a user from the database</returns>
+        /// <remarks>GET: api/Post/GetUserPosts</remarks>
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetUserPosts([FromBody] UserDto model)
         {
-            var response = new Response {Message = "All posts are selected", Payload = Repository.Post.FindAll()};
+            var response = new Response();
 
-            return Ok(response);
+            if (UserIsValid(model.Id))
+            {
+                response.Message = "All posts are selected";
+                response.Payload = Repository.Post.FindByCondition(p => p.UserId.Equals(model.Id));
+
+                return Ok(response);
+            }
+
+            response.Message = "The requesting user is not matching with the authorized one";
+            return BadRequest(response);
         }
 
         /// <summary>
