@@ -38,6 +38,8 @@ namespace Legato.Utilities
             "K-Pop"
         };
 
+        private readonly Post _post;
+
         private readonly UserRegistration _userRegistration;
 
         /// <summary>
@@ -47,6 +49,15 @@ namespace Legato.Utilities
         public UserInputValidation(UserRegistration userRegistration)
         {
             _userRegistration = userRegistration;
+        }
+
+        /// <summary>
+        ///     Constructor for UserInputValidation class to validate post inputs
+        /// </summary>
+        /// <param name="post">Post model</param>
+        public UserInputValidation(Post post)
+        {
+            _post = post;
         }
 
         /// <summary>
