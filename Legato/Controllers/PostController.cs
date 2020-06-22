@@ -1,8 +1,9 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Threading.Tasks;
 using Legato.Contexts.Contracts;
 using Legato.Models.PostModel;
 using Legato.Models.UtilityModels;
+using Legato.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
@@ -70,14 +71,14 @@ namespace Legato.Controllers
         /// <summary>
         ///     Update a specified post
         /// </summary>
-        /// <param name="post">Post to update</param>
+        /// <param name="model">Post to update</param>
         /// <returns>Defines a contract that represents the result of an action method</returns>
         /// <remarks>PUT: api/Post/5</remarks>
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put([FromBody] Post post)
+        public async Task<IActionResult> Put([FromBody] Post model)
         {
             var response = new Response();
-            if (Repository.Post.FindByCondition(p => p.Equals(post)).FirstOrDefault() == null)
+            if (Repository.Post.FindByCondition(p => p.Equals(model)).FirstOrDefault() == null)
             {
                 response.Message = "Post was not found";
                 return BadRequest(response);
@@ -85,7 +86,7 @@ namespace Legato.Controllers
 
             try
             {
-                Repository.Post.Update(post);
+                Repository.Post.Update(model);
                 await Repository.Save();
             }
             catch (SqlException e)
@@ -95,7 +96,7 @@ namespace Legato.Controllers
             }
 
             response.Message = "Post was updated";
-            response.Payload = post;
+            response.Payload = model;
             return Ok(response);
         }
 
