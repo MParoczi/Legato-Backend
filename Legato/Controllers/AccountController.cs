@@ -320,7 +320,8 @@ namespace Legato.Controllers
             {
                 new Claim(JwtRegisteredClaimNames.Sub, model.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.UniqueName, model.Email)
+                new Claim(JwtRegisteredClaimNames.UniqueName, model.Email),
+                new Claim(JwtRegisteredClaimNames.NameId, model.Id.ToString())
             };
 
             var token = new JwtSecurityToken(JwtCredentials.Issuer, JwtCredentials.Audience, claims,
