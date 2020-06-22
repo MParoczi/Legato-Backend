@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Threading.Tasks;
 using Legato.Contexts.Contracts;
 using Legato.Models.PostModel;
@@ -112,6 +114,12 @@ namespace Legato.Controllers
             var response = new Response();
             var validator = new UserInputValidation(model);
 
+            if (!UserIsValid(model.UserId))
+            {
+                response.Message = "The posting user is not matching with the authorized one";
+                return BadRequest(response);
+            }
+
             if (!ModelState.IsValid || !validator.PostIsValid())
             {
                 response.Message = "Post is in invalid form";
@@ -151,6 +159,22 @@ namespace Legato.Controllers
             response.Payload = post;
 
             return Ok(response);
+        }
+
+        private bool UserIsValid(int id)
+        {
+            var jwt = HttpContext.Request.Headers["Authorization"][0];
+
+            if (jwt == null) return false;
+
+            jwt = jwt.Replace("Bearer ", "");
+
+            var jwtHandler = new JwtSecurityTokenHandler();
+            var result = jwtHandler.ReadToken(jwt) as JwtSecurityToken;
+
+            var userId = result?.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.NameId)?.Value;
+
+            return userId != null && Convert.ToInt32(userId).Equals(id);
         }
     }
 }
