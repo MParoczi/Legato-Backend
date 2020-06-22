@@ -1,4 +1,4 @@
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Legato.Contexts.Contracts;
 using Legato.Models.PostModel;
@@ -103,19 +103,26 @@ namespace Legato.Controllers
         /// <summary>
         ///     Add a new post to the database
         /// </summary>
-        /// <param name="post"></param>
+        /// <param name="model"></param>
         /// <returns>Defines a contract that represents the result of an action method</returns>
         /// <remarks>POST: api/Post</remarks>
         [HttpPost]
-        public async Task<ActionResult<Post>> Add([FromBody] Post post)
+        public async Task<ActionResult<Post>> Add([FromBody] Post model)
         {
             var response = new Response();
+            var validator = new UserInputValidation(model);
 
-            Repository.Post.Create(post);
+            if (!ModelState.IsValid || !validator.PostIsValid())
+            {
+                response.Message = "Post is in invalid form";
+                return BadRequest(response);
+            }
+
+            Repository.Post.Create(model);
             await Repository.Save();
 
             response.Message = "Post was added";
-            response.Payload = post;
+            response.Payload = model;
             return Ok(response);
         }
 
