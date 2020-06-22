@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Legato.Models.PostModel;
 using Legato.Models.UserModels;
 
 namespace Legato.Utilities
@@ -40,7 +41,7 @@ namespace Legato.Utilities
         private readonly UserRegistration _userRegistration;
 
         /// <summary>
-        ///     Constructor for UserInputValidation class
+        ///     Constructor for UserInputValidation class to validate registration inputs
         /// </summary>
         /// <param name="userRegistration">User registration model</param>
         public UserInputValidation(UserRegistration userRegistration)
