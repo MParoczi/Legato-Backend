@@ -1,6 +1,8 @@
 ﻿# Legato - Backend
 Welcome to the GitHub repository of the Legato project's backend!
 
+![Heroku](https://heroku-badge.herokuapp.com/?app=legato-social)
+
 ## The project
 ### The idea
 The Legato project aims to create a community space where registered users can find each other based on their music
