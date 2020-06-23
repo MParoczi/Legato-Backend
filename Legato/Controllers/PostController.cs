@@ -153,7 +153,7 @@ namespace Legato.Controllers
         /// <returns>Defines a contract that represents the result of an action method</returns>
         /// <remarks>DELETE: api/Post/5</remarks>
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Post>> Delete([FromQuery] int id)
+        public async Task<ActionResult<Post>> Delete(int id)
         {
             var response = new Response();
 
