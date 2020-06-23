@@ -9,7 +9,6 @@ using Legato.Models.UtilityModels;
 using Legato.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
 
 namespace Legato.Controllers
 {
@@ -48,7 +47,8 @@ namespace Legato.Controllers
             if (UserIsValid(model.Id))
             {
                 response.Message = "All posts are selected";
-                response.Payload = Repository.Post.FindByCondition(p => p.UserId.Equals(model.Id)).OrderByDescending(p => p.DateOfCreation);
+                response.Payload = Repository.Post.FindByCondition(p => p.UserId.Equals(model.Id))
+                    .OrderByDescending(p => p.DateOfCreation);
 
                 return Ok(response);
             }
@@ -84,28 +84,36 @@ namespace Legato.Controllers
         ///     Update a specified post
         /// </summary>
         /// <param name="model">Post to update</param>
+        /// <param name="id">Id of the post</param>
         /// <returns>Defines a contract that represents the result of an action method</returns>
         /// <remarks>PUT: api/Post/5</remarks>
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put([FromBody] Post model)
+        public async Task<IActionResult> Put(int id, [FromBody] Post model)
         {
             var response = new Response();
-            if (Repository.Post.FindByCondition(p => p.Equals(model)).FirstOrDefault() == null)
+            var validator = new UserInputValidation(model);
+
+            if (!UserIsValid(model.UserId))
+            {
+                response.Message = "The posting user is not matching with the authorized one";
+                return BadRequest(response);
+            }
+
+            if (Repository.Post.FindByCondition(p => p.Id.Equals(id)).FirstOrDefault() == null)
             {
                 response.Message = "Post was not found";
                 return BadRequest(response);
             }
 
-            try
+            if (!ModelState.IsValid || !validator.PostIsValid())
             {
-                Repository.Post.Update(model);
-                await Repository.Save();
-            }
-            catch (SqlException e)
-            {
-                response.Message = e.ToString();
+                response.Message = "Post is in invalid form";
                 return BadRequest(response);
             }
+
+            Repository.Post.Update(model);
+            await Repository.Save();
+
 
             response.Message = "Post was updated";
             response.Payload = model;
@@ -137,7 +145,7 @@ namespace Legato.Controllers
             }
 
             model.DateOfCreation = DateTime.Now;
-            
+
             Repository.Post.Create(model);
             await Repository.Save();
 
