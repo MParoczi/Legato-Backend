@@ -8,6 +8,7 @@ using AppContext = Legato.Contexts.AppContext;
 
 namespace Legato.Migrations
 {
+#pragma warning disable CS1591
     [DbContext(typeof(AppContext))]
     internal class IdentityAppContextModelSnapshot : ModelSnapshot
     {
@@ -29,6 +30,9 @@ namespace Legato.Migrations
 
                 b.Property<string>("Content")
                     .HasColumnType("text");
+
+                b.Property<DateTime>("DateOfCreation")
+                    .HasColumnType("timestamp without time zone");
 
                 b.Property<string>("Title")
                     .HasColumnType("text");
@@ -330,4 +334,5 @@ namespace Legato.Migrations
 #pragma warning restore 612, 618
         }
     }
+#pragma warning restore CS1591
 }
