@@ -1,4 +1,5 @@
-﻿using Legato.Models.UserModels;
+﻿using System;
+using Legato.Models.UserModels;
 
 namespace Legato.Models.PostModel
 {
@@ -21,6 +22,11 @@ namespace Legato.Models.PostModel
         ///     Content of the post
         /// </summary>
         public string Content { get; set; }
+
+        /// <summary>
+        ///     Date of the creation of the post
+        /// </summary>
+        public DateTime DateOfCreation { get; set; }
 
         /// <summary>
         ///     Id of the user that created the post

@@ -136,6 +136,8 @@ namespace Legato.Controllers
                 return BadRequest(response);
             }
 
+            model.DateOfCreation = DateTime.Now;
+            
             Repository.Post.Create(model);
             await Repository.Save();
 
