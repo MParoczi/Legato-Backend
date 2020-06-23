@@ -48,7 +48,7 @@ namespace Legato.Controllers
             if (UserIsValid(model.Id))
             {
                 response.Message = "All posts are selected";
-                response.Payload = Repository.Post.FindByCondition(p => p.UserId.Equals(model.Id));
+                response.Payload = Repository.Post.FindByCondition(p => p.UserId.Equals(model.Id)).OrderByDescending(p => p.DateOfCreation);
 
                 return Ok(response);
             }
