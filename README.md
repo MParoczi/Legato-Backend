@@ -1,6 +1,8 @@
 ﻿# Legato - Backend
 Welcome to the GitHub repository of the Legato project's backend!
 
+![Heroku](https://heroku-badge.herokuapp.com/?app=legato-social)
+
 ## The project
 ### The idea
 The Legato project aims to create a community space where registered users can find each other based on their music
@@ -22,10 +24,8 @@ The backend of the Legato social network were created with the following technol
  * Entity Framework which is responsible for data persistence
  * Identity as the system to authorize and authenticate the users
 
-## How to run
-To run the application, simply navigate to the source folder of the project and open the dotnet command line
-interface and run ```dotnet run```. This requires [.NET Core SDK](https://docs.microsoft.com/en-us/dotnet/core/sdk) to be
-installed on your system. The web server will host on ```http://localhost:5000```.
+## Demo
+The deployed version of the Web API is available at the following link: [Legato's Backend](https://legato-social.herokuapp.com/)
 
 ## Credits
 The project was created during the period of my studies at Codecool Ltd. in 2020. **It is still under development!**
