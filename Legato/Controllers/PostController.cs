@@ -164,6 +164,12 @@ namespace Legato.Controllers
                 return BadRequest(response);
             }
 
+            if (!UserIsValid(post.UserId))
+            {
+                response.Message = "The deleting user is not matching with the authorized one";
+                return BadRequest(response);
+            }
+
             Repository.Post.Delete(post);
             await Repository.Save();
 
