@@ -12,8 +12,8 @@ namespace Legato.Migrations
 {
 #pragma warning disable CS1591
     [DbContext(typeof(AppContext))]
-    [Migration("20200624163021_MakedDateOfEditNullable")]
-    partial class MakedDateOfEditNullable
+    [Migration("20200624163021_MakeDateOfEditNullable")]
+    partial class MakeDateOfEditNullable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

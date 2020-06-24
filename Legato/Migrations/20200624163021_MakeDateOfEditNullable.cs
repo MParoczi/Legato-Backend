@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Legato.Migrations
 {
 #pragma warning disable CS1591
-    public partial class MakedDateOfEditNullable : Migration
+    public partial class MakeDateOfEditNullable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
