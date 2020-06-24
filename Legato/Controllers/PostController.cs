@@ -111,6 +111,8 @@ namespace Legato.Controllers
                 return BadRequest(response);
             }
 
+            model.Edited = new DateTime();
+            
             Repository.Post.Update(model);
             await Repository.Save();
 
