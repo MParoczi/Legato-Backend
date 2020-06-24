@@ -4,7 +4,6 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using AppContext = Legato.Contexts.AppContext;
 
 namespace Legato.Migrations
 {
@@ -29,12 +28,17 @@ namespace Legato.Migrations
                         NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                 b.Property<string>("Content")
+                    .IsRequired()
                     .HasColumnType("text");
 
                 b.Property<DateTime>("DateOfCreation")
                     .HasColumnType("timestamp without time zone");
 
+                b.Property<DateTime>("Edited")
+                    .HasColumnType("timestamp without time zone");
+
                 b.Property<string>("Title")
+                    .IsRequired()
                     .HasColumnType("text");
 
                 b.Property<int>("UserId")
