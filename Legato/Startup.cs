@@ -61,9 +61,9 @@ namespace Legato
             services.ConfigureRepository();
 
             services.ConfigureCors();
-            
+
             services.ConfigureEmailService(Configuration);
-            
+
             services.ConfigureAuthentication();
         }
 

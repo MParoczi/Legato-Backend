@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Legato.Models;
+using Legato.Models.PostModel;
+using Legato.Models.UserModels;
 
 namespace Legato.Utilities
 {
@@ -37,15 +38,26 @@ namespace Legato.Utilities
             "K-Pop"
         };
 
+        private readonly Post _post;
+
         private readonly UserRegistration _userRegistration;
 
         /// <summary>
-        ///     Constructor for UserInputValidation class
+        ///     Constructor for UserInputValidation class to validate registration inputs
         /// </summary>
         /// <param name="userRegistration">User registration model</param>
         public UserInputValidation(UserRegistration userRegistration)
         {
             _userRegistration = userRegistration;
+        }
+
+        /// <summary>
+        ///     Constructor for UserInputValidation class to validate post inputs
+        /// </summary>
+        /// <param name="post">Post model</param>
+        public UserInputValidation(Post post)
+        {
+            _post = post;
         }
 
         /// <summary>
@@ -63,6 +75,24 @@ namespace Legato.Utilities
                 ValidateGenres(_userRegistration.Genres);
                 ValidatePassword(_userRegistration.Password);
                 ValidateEmail(_userRegistration.Email);
+                return true;
+            }
+            catch (ValidationException)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        ///     Validates the user's inputs given at posting
+        /// </summary>
+        /// <returns>Boolean value whether every value is valid or not</returns>
+        public bool PostIsValid()
+        {
+            try
+            {
+                ValidatePostTitle(_post.Title);
+                ValidatePostContent(_post.Content);
                 return true;
             }
             catch (ValidationException)
@@ -147,6 +177,20 @@ namespace Legato.Utilities
                 @"^(([^<>()\[\]\\.,;:\s@]+(\.[^<>()\[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$");
 
             if (!match.Success) throw new ValidationException();
+
+            return true;
+        }
+
+        private bool ValidatePostTitle(string title)
+        {
+            if (title == null) throw new ValidationException();
+
+            return true;
+        }
+
+        private bool ValidatePostContent(string content)
+        {
+            if (content == null) throw new ValidationException();
 
             return true;
         }

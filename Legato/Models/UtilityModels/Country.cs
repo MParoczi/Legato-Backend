@@ -1,4 +1,4 @@
-﻿namespace Legato.Models
+﻿namespace Legato.Models.UtilityModels
 {
     /// <summary>
     ///     POCO for country

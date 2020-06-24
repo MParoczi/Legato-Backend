@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
-namespace Legato.Models
+namespace Legato.Models.AuthorizationModels
 {
     /// <summary>
     ///     Contains constants that needs to configure the JWT token provider

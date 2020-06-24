@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Legato.Models.PostModel;
 using Microsoft.AspNetCore.Identity;
 
-namespace Legato.Models
+namespace Legato.Models.UserModels
 {
     /// <summary>
     ///     The main user model that is provided for the identity
@@ -51,11 +52,17 @@ namespace Legato.Models
         [Required]
         [ProtectedPersonalData]
         public string RefreshToken { get; set; }
-        
+
         /// <summary>
         ///     Cloudinary URL for the user's profile picture
         /// </summary>
         [ProtectedPersonalData]
         public string ProfilePicture { get; set; }
+
+        /// <summary>
+        ///     Posts of the user
+        /// </summary>
+        [ProtectedPersonalData]
+        public ICollection<Post> Posts { get; set; }
     }
 }
