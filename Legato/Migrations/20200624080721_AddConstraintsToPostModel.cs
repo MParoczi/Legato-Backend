@@ -25,7 +25,7 @@ namespace Legato.Migrations
                 oldNullable: true);
 
             migrationBuilder.AddColumn<DateTime>(
-                "Edited",
+                "DateOfEdit",
                 "Posts",
                 nullable: false,
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
@@ -34,7 +34,7 @@ namespace Legato.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                "Edited",
+                "DateOfEdit",
                 "Posts");
 
             migrationBuilder.AlterColumn<string>(
