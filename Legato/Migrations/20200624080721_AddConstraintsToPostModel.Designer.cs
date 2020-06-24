@@ -37,7 +37,7 @@ namespace Legato.Migrations
                     b.Property<DateTime>("DateOfCreation")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<DateTime>("DateOfEdit")
+                    b.Property<DateTime>("Edited")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Title")
