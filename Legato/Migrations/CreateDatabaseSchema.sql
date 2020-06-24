@@ -141,3 +141,38 @@ CREATE INDEX "IX_Posts_UserId" ON "Posts" ("UserId");
 
 INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
 VALUES ('20200617130343_AddPosts', '3.1.4');
+
+ALTER TABLE "Posts"
+    ADD "DateOfCreation" timestamp without time zone NOT NULL DEFAULT TIMESTAMP '0001-01-01 00:00:00';
+
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20200623043228_AddDateOfCreationOfPost', '3.1.4');
+
+ALTER TABLE "Posts"
+    ALTER COLUMN "Title" TYPE text;
+ALTER TABLE "Posts"
+    ALTER COLUMN "Title" SET NOT NULL;
+ALTER TABLE "Posts"
+    ALTER COLUMN "Title" DROP DEFAULT;
+
+ALTER TABLE "Posts"
+    ALTER COLUMN "Content" TYPE text;
+ALTER TABLE "Posts"
+    ALTER COLUMN "Content" SET NOT NULL;
+ALTER TABLE "Posts"
+    ALTER COLUMN "Content" DROP DEFAULT;
+
+ALTER TABLE "Posts"
+    ADD "Edited" timestamp without time zone NOT NULL DEFAULT TIMESTAMP '0001-01-01 00:00:00';
+
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20200624080721_AddConstraintsToPostModel', '3.1.4');
+
+ALTER TABLE "Posts"
+    DROP COLUMN "Edited";
+
+ALTER TABLE "Posts"
+    ADD "DateOfEdit" timestamp without time zone NULL;
+
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20200624163021_MakeDateOfEditNullable', '3.1.4');
