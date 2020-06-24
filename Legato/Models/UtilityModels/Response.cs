@@ -1,4 +1,4 @@
-﻿namespace Legato.Models
+﻿namespace Legato.Models.UtilityModels
 {
     /// <summary>
     ///     Contains properties for the HTTP responses

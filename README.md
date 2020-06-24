@@ -1,7 +1,7 @@
 ﻿# Legato - Backend
 Welcome to the GitHub repository of the Legato project's backend!
 
-![Heroku](https://heroku-badge.herokuapp.com/?app=legato-social)
+[![Heroku](https://heroku-badge.herokuapp.com/?app=legato-social)](https://legato-social.herokuapp.com/index.html)
 
 ## The project
 ### The idea

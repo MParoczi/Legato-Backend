@@ -13,6 +13,11 @@ namespace Legato.Contexts.Contracts
         IUserRepository User { get; }
 
         /// <summary>
+        ///     PostRepository class that contains methods to alter the post entity in the database
+        /// </summary>
+        IPostRepository Post { get; }
+
+        /// <summary>
         ///     Save changes in the database
         /// </summary>
         Task Save();

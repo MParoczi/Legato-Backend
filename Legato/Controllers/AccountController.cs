@@ -7,7 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using EmailService;
 using Legato.Contexts.Contracts;
-using Legato.Models;
+using Legato.Models.AuthorizationModels;
+using Legato.Models.UserModels;
+using Legato.Models.UtilityModels;
 using Legato.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -318,7 +320,8 @@ namespace Legato.Controllers
             {
                 new Claim(JwtRegisteredClaimNames.Sub, model.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.UniqueName, model.Email)
+                new Claim(JwtRegisteredClaimNames.UniqueName, model.Email),
+                new Claim(JwtRegisteredClaimNames.NameId, model.Id.ToString())
             };
 
             var token = new JwtSecurityToken(JwtCredentials.Issuer, JwtCredentials.Audience, claims,

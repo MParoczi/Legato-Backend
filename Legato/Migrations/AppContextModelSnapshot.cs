@@ -4,12 +4,13 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+using AppContext = Legato.Contexts.AppContext;
 
 namespace Legato.Migrations
 {
 #pragma warning disable CS1591
     [DbContext(typeof(AppContext))]
-    internal class IdentityAppContextModelSnapshot : ModelSnapshot
+    internal class AppContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -34,7 +35,7 @@ namespace Legato.Migrations
                 b.Property<DateTime>("DateOfCreation")
                     .HasColumnType("timestamp without time zone");
 
-                b.Property<DateTime>("Edited")
+                b.Property<DateTime?>("DateOfEdit")
                     .HasColumnType("timestamp without time zone");
 
                 b.Property<string>("Title")

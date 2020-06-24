@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Legato.Models.AuthorizationModels;
 
-namespace Legato.Models
+namespace Legato.Models.UserModels
 {
     /// <summary>
     ///     Simple POCO object to transfer user information to the frontend

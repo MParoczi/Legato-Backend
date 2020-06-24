@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace Legato.Models
+namespace Legato.Models.UserModels
 {
     /// <summary>
     ///     UserRegistration model which contains the necessary properties to register a user

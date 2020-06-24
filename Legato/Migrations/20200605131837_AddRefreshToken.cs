@@ -8,8 +8,8 @@ namespace Legato.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "RefreshToken",
-                table: "AspNetUsers",
+                "RefreshToken",
+                "AspNetUsers",
                 nullable: false,
                 defaultValue: "");
         }
@@ -17,8 +17,8 @@ namespace Legato.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "RefreshToken",
-                table: "AspNetUsers");
+                "RefreshToken",
+                "AspNetUsers");
         }
     }
 #pragma warning restore CS1591

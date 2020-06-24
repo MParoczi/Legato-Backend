@@ -1,5 +1,6 @@
 ﻿using Legato.Contexts.Configuration;
-using Legato.Models;
+using Legato.Models.PostModel;
+using Legato.Models.UserModels;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,6 +21,11 @@ namespace Legato.Contexts
         }
 
         /// <summary>
+        ///     DbSet that represents the post persisted in the database
+        /// </summary>
+        public DbSet<Post> Posts { get; set; }
+
+        /// <summary>
         ///     Configures the schema needed for the identity framework.
         /// </summary>
         /// <param name="builder">The builder being used to construct the model for this context.</param>
@@ -27,6 +33,7 @@ namespace Legato.Contexts
         {
             base.OnModelCreating(builder);
             builder.ApplyConfiguration(new UserEntityTypeConfiguration());
+            builder.ApplyConfiguration(new PostEntityTypeConfiguration());
         }
     }
 }

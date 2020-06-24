@@ -1,4 +1,4 @@
-﻿namespace Legato.Models
+﻿namespace Legato.Models.UserModels
 {
     /// <summary>
     ///     UserLogin model which contains the necessary properties to login a user
