@@ -35,7 +35,7 @@ namespace Legato.Models.PostModel
         /// <summary>
         ///     Date of the last edit
         /// </summary>
-        public DateTime Edited { get; set; }
+        public DateTime? Edited { get; set; }
 
         /// <summary>
         ///     Id of the user that created the post
