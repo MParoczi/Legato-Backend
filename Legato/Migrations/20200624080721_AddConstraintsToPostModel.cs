@@ -3,29 +3,30 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Legato.Migrations
 {
+#pragma warning disable CS1591
     public partial class AddConstraintsToPostModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
-                name: "Title",
-                table: "Posts",
+                "Title",
+                "Posts",
                 nullable: false,
                 oldClrType: typeof(string),
                 oldType: "text",
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
-                name: "Content",
-                table: "Posts",
+                "Content",
+                "Posts",
                 nullable: false,
                 oldClrType: typeof(string),
                 oldType: "text",
                 oldNullable: true);
 
             migrationBuilder.AddColumn<DateTime>(
-                name: "Edited",
-                table: "Posts",
+                "Edited",
+                "Posts",
                 nullable: false,
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
         }
@@ -33,22 +34,23 @@ namespace Legato.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Edited",
-                table: "Posts");
+                "Edited",
+                "Posts");
 
             migrationBuilder.AlterColumn<string>(
-                name: "Title",
-                table: "Posts",
-                type: "text",
+                "Title",
+                "Posts",
+                "text",
                 nullable: true,
                 oldClrType: typeof(string));
 
             migrationBuilder.AlterColumn<string>(
-                name: "Content",
-                table: "Posts",
-                type: "text",
+                "Content",
+                "Posts",
+                "text",
                 nullable: true,
                 oldClrType: typeof(string));
         }
     }
+#pragma warning restore CS1591
 }
