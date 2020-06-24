@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Legato.Models.UserModels;
 
 namespace Legato.Models.PostModel
@@ -16,16 +17,19 @@ namespace Legato.Models.PostModel
         /// <summary>
         ///     Title of the post
         /// </summary>
+        [Required]
         public string Title { get; set; }
 
         /// <summary>
         ///     Content of the post
         /// </summary>
+        [Required]
         public string Content { get; set; }
 
         /// <summary>
         ///     Date of the creation of the post
         /// </summary>
+        [Required]
         public DateTime DateOfCreation { get; set; }
         
         /// <summary>
@@ -36,6 +40,7 @@ namespace Legato.Models.PostModel
         /// <summary>
         ///     Id of the user that created the post
         /// </summary>
+        [Required]
         public int UserId { get; set; }
 
         /// <summary>
