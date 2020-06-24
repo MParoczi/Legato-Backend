@@ -27,6 +27,11 @@ namespace Legato.Models.PostModel
         ///     Date of the creation of the post
         /// </summary>
         public DateTime DateOfCreation { get; set; }
+        
+        /// <summary>
+        ///     Date of the last edit
+        /// </summary>
+        public DateTime Edited { get; set; }
 
         /// <summary>
         ///     Id of the user that created the post
