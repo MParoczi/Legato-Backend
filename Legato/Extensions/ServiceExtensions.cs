@@ -90,6 +90,8 @@ namespace Legato.Extensions
         /// <param name="services">Specifies the contract for a collection of service descriptors.</param>
         public static void ConfigureRepository(this IServiceCollection services)
         {
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
         }
 
