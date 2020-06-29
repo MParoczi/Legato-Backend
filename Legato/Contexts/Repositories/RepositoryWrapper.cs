@@ -9,27 +9,29 @@ namespace Legato.Contexts.Repositories
     public class RepositoryWrapper : IRepositoryWrapper
     {
         private readonly AppContext _context;
-        private IPostRepository _post;
-        private IUserRepository _user;
 
         /// <summary>
         ///     Constructor for the RepositoryWrapper class
         /// </summary>
         /// <param name="context">Provided AppContext via Dependency Injection</param>
-        public RepositoryWrapper(AppContext context)
+        /// <param name="post">PostRepository class that contains methods to alter the post entity in the database</param>
+        /// <param name="user">UserRepository class that contains methods to alter the user entity in the database</param>
+        public RepositoryWrapper(AppContext context, IPostRepository post, IUserRepository user)
         {
             _context = context;
+            Post = post;
+            User = user;
         }
-
-        /// <summary>
-        ///     UserRepository class that contains methods to alter the user entity in the database
-        /// </summary>
-        public IUserRepository User => _user ??= new UserRepository(_context);
 
         /// <summary>
         ///     PostRepository class that contains methods to alter the post entity in the database
         /// </summary>
-        public IPostRepository Post => _post ??= new PostRepository(_context);
+        public IPostRepository Post { get; }
+
+        /// <summary>
+        ///     UserRepository class that contains methods to alter the user entity in the database
+        /// </summary>
+        public IUserRepository User { get; }
 
         /// <summary>
         ///     Save changes in the database
