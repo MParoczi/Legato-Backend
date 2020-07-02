@@ -265,6 +265,23 @@ namespace Legato.Controllers
         }
 
         /// <summary>
+        /// Get every user who are stored in the database
+        /// </summary>
+        /// <returns>Every user</returns>
+        [Authorize]
+        public IActionResult GetUsers()
+        {
+            var response = new Response();
+
+            var users = Repository.User.FindAll();
+
+            response.Payload = users.ToList();
+            response.Message = "All users are collected";
+
+            return Ok(response);
+        }
+
+        /// <summary>
         ///     Handler to change the profile picture of the user
         /// </summary>
         /// <param name="model">Simple POCO object that represents the logged in user</param>
