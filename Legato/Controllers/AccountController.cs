@@ -269,6 +269,7 @@ namespace Legato.Controllers
         /// </summary>
         /// <returns>Every user</returns>
         [Authorize]
+        [HttpGet]
         public IActionResult GetUsers()
         {
             var response = new Response();
